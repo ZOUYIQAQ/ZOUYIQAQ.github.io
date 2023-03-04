@@ -13,11 +13,11 @@
 
     <title>
         
-          About - 赛博法师的博客 | Cyber Sorcerer&#39;s Blog
+           Hexo博客的搭建与推送 - 赛博法师的博客 | Cyber Sorcerer&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://kaijun.rocks/ZOUYIQAQ.github.io/about/">
+    <link rel="canonical" href="https://kaijun.rocks/ZOUYIQAQ.github.io/2023/03/05/Hexo博客搭建流程/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -153,125 +153,160 @@
 
 
     <!-- Main Content -->
-    <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/about-bg.jpg')">
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://kaijun.rocks/ZOUYIQAQ.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('小弃05588314_p0.png')
+    }
+</style>
+<header class="intro-header" >
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>About</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">Hey, this is Cyber Sorcerer.</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#git" title="git">git</a>
+                        
+                          <a class="tag" href="/tags/#github" title="github">github</a>
+                        
+                    </div>
+                    <h1> Hexo博客的搭建与推送</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by Lazy cat on
+                        2023-03-05
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
-
-<!-- USE SIDEBAR -->
     <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                <blockquote>
-<p>来自幻想乡。<br>是一名赛博法师。</p>
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="Hexo博客的搭建与推送"><a href="#Hexo博客的搭建与推送" class="headerlink" title="Hexo博客的搭建与推送"></a>Hexo博客的搭建与推送</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>首先，需要阅读<a href="https://www.itbob.cn/article/002/">这篇文章</a>，简单易懂，十分详细。本文也是对这篇文章的补充与部分更改，因这篇文章的创作时间为2018年，距今已过太久，难免会有些东西在其中过时。于是便有了这篇博客，需要注意的是，这篇博客并不是<strong>完全从零开始的新手教学</strong>，而是对<a href="https://www.itbob.cn/article/002/">这篇文章</a>的<strong>补充与更改</strong>，所以请务必先阅读<a href="https://www.itbob.cn/article/002/">这篇文章</a>。</p>
+<p>另外，下文中所有的操作均在win10系统下操作，不涉及到其他系统的教学。</p>
+<p>方便起见，这篇文章：<a href="https://www.itbob.cn/article/002/">这篇文章</a>在下文中统称原文。</p>
+<h2 id="入门部分"><a href="#入门部分" class="headerlink" title="入门部分"></a>入门部分</h2><h3 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h3><p>随着时间变化，原文的git安装部分可以说是完全变了个样，下面是具体的变化和补充。</p>
+<ul>
+<li><h4 id="选择版本和安装"><a href="#选择版本和安装" class="headerlink" title="选择版本和安装"></a>选择版本和安装</h4><p>点开原文中的Git 官网下载地址，可以看到以下界面：</p>
+<p><img src="image-20230304205306768.png" alt="image-20230304205306768"></p>
+<p>选择对应的操作系统后能看到以下界面：</p>
+<p><img src="image-20230304205600730.png" alt="image-20230304205600730"></p>
+<p>在其中，“click here to download”是下载最新版本的独立安装程序；“Standalone Installer”是独立安装程序；“Portable (“thumbdrive edition”)”是免安装绿色版本。选择自己中意的安装就好。这几种模式均具有我们搭建博客需要的所有功能，唯一的区别是独立安装版在安装后会在鼠标右键添加 Git GUI Here 和 Git Bash Here 两个选项，而免安装版则没有。只能通过解压后的git-bash.exe或git-cmd.exe运行。</p>
+<p>具体原因未知，我在安装独立安装版本时，电脑发生了蓝屏的情况，万幸的是电脑没有丢失任何数据，这一点需要注意。</p>
+<blockquote>
+<p>对于独立安装包可以参考这个教程，<a href="https://cloud.tencent.com/developer/article/2099150">超详细 Git 安装教程</a></p>
 </blockquote>
-<p>幻想乡遭受未知的强大力量打击，为了保护众多居民的安全，我被灵梦委以重任，现身于世，潜伏于网络，运用至高魔法寻找神秘力量的踪迹。<br>却不料神秘操纵者居然隐藏在我之左右，趁我不意，夺走我的力量。<br>最后，我只得化身赛博法师，潜于网络，为了战胜神秘操纵者而积蓄力量。。。。。。</p>
+<blockquote>
+<p>免安装版实际上是一个压缩文件，按照提示解压即可。</p>
+</blockquote>
+<h2 id="部署至Github-Pages"><a href="#部署至Github-Pages" class="headerlink" title="部署至Github Pages"></a>部署至Github Pages</h2><ul>
+<li><h4 id="创建库"><a href="#创建库" class="headerlink" title="创建库"></a>创建库</h4></li>
+</ul>
+<p>Github的界面与几年前有了些改动，对于我这种第一次创建库的人来说，这一点小小的改动简直要了我的命。创建代码库的位置在主页的这里：</p>
+<p><img src="image-20230304211247921.png" alt="image-20230304211247921"></p>
+</li>
+</ul>
+<p>同时，在创建代码库时，界面也稍有改动，只是原文中需要打勾的地方没了而已。</p>
+<ul>
+<li><h4 id="修改-config-yml文件"><a href="#修改-config-yml文件" class="headerlink" title="修改 _config.yml文件"></a>修改 _config.yml文件</h4><p>如图。</p>
+<p> <img src="image-20230304211917796.png" alt="image-20230304211917796"></p>
+<ul>
+<li><h4 id="推送至Github-Pages"><a href="#推送至Github-Pages" class="headerlink" title="推送至Github Pages"></a>推送至Github Pages</h4><p>不知道是不是因为软件更迭的原因，我在推送至Github Pages时没有遇到需要输入账号密码的步骤，但页面也仍然上传了。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><ul>
+<li><h4 id="更新后推送至Github-Pages"><a href="#更新后推送至Github-Pages" class="headerlink" title="更新后推送至Github Pages"></a>更新后推送至Github Pages</h4><p>这一步是我耗时最长的一步，主要原因是我的配置文件设置( _config.yml)错误。</p>
+<p>在我推送网页至Github Pages后打开发现页面可以打开，但图片和css样式却全部消失。搜索后发现可能的原因有</p>
+<ol>
+<li><p>js错误</p>
+</li>
+<li><p>图片和css文件位置错误</p>
+</li>
+<li><p>相对路径写成了绝对路径</p>
+<p>但我却发现上面三条的配置都没有问题，在纠结了好一阵后还是靠着cahtgpt才明白了来龙去脉。原因是配置文件中的这里写错了：</p>
+<p><img src="image-20230304214149174.png" alt="image-20230304214149174"></p>
+<p>对于这里，有几个个十分重要的点：</p>
+</li>
+</ol>
+</li>
+<li><p>对于url，最后的斜杠后要接上的是你的项目的名称，前面的只要能正常显示就不用管。</p>
+</li>
+<li><p>对于root，它代表的根目录，在更改之前，我的root为“\ZOUYIQAQ.github.io\”，而这显然是错误的，在我的文件中，文件定位从根目录开始，而不是“ZOUYIQAQ.github.io\”。</p>
+<p>所以对于在本地显示正常，但在线上就出现问题的情况就可以考虑这样做：</p>
+<blockquote>
+<ul>
+<li>首先，确定自己的文件使用的是相对路径还是绝对路径</li>
+<li>然后，检查文件是否在路径应有的位置。</li>
+<li>最后，更改文件或配置文件。</li>
+</ul>
+</blockquote>
+<h2 id="配置个性域名"><a href="#配置个性域名" class="headerlink" title="配置个性域名"></a>配置个性域名</h2><p>这里没什么问题，只要按着原文来做就好。只是有一点需要注意，在配置完域名解析后，需要十几二十分钟的时间来生效，如果没反应的话可以等等看。</p>
+</li>
+</ul>
 
 
-                <!-- 如果开启评论功能 -->
+                <hr>
+
                 
-                    <hr>
 
+                <ul class="pager">
                     
-
                     
-
-
+                        <li class="next">
+                            <a href="/2023/03/04/hello-world/" data-toggle="tooltip" data-placement="top" title="Hello World">Next Post &rarr;</a>
+                        </li>
                     
+                </ul>
 
-                    
-
-
+                
 
                 
 
             </div>
+    <!-- Side Catalog Container -->
+        
+
     <!-- Sidebar Container -->
+
             <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
                 <!-- Featured Tags -->
                 
                 <section>
                     <!-- no hr -->
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
+                       
+                          <a class="tag" href="/tags/#git" title="git">git</a>
                         
-                            
-                        
-                            
+                          <a class="tag" href="/tags/#github" title="github">github</a>
                         
                     </div>
                 </section>
                 
 
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
-                    <div class="short-about">
-
-                        
-                            <img src="//ZOUYIQAQ.github.io/img/avatar.jpg" />
-                        
-
-                        
-                            <p>世界第一的赛博法师!</p>
-                        
-
-                        <!-- SNS Link -->
-                        <ul class="list-inline">
-                            
-                            
-                            
-
-                            
-
-                            
-
-                            
-                                <li>
-                                    <a target="_blank"  href="https://github.com/ZOUYIQAQ">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-                            
-                            
-                            
-                        </ul>
-                    </div>
-                </section>
-                
                 <!-- Friends Blog -->
                 
                 <hr>
@@ -286,9 +321,51 @@
                 </ul>
                 
             </div>
-        
+
+        </div>
     </div>
-</div>
+</article>
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
 
 
     <!-- Footer -->
