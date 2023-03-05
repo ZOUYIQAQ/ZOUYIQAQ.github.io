@@ -13,7 +13,7 @@
 
     <title>
         
-           Hexo博客的搭建与推送 - 赛博法师的博客 | Cyber Sorcerer&#39;s Blog
+          Hexo博客的搭建与推送 - 赛博法师的博客 | Cyber Sorcerer&#39;s Blog
         
     </title>
 
@@ -176,7 +176,7 @@
                           <a class="tag" href="/tags/#github" title="github">github</a>
                         
                     </div>
-                    <h1> Hexo博客的搭建与推送</h1>
+                    <h1>Hexo博客的搭建与推送</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Lazy cat on
@@ -199,7 +199,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="Hexo博客的搭建与推送"><a href="#Hexo博客的搭建与推送" class="headerlink" title="Hexo博客的搭建与推送"></a>Hexo博客的搭建与推送</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>首先，需要阅读<a href="https://www.itbob.cn/article/002/">这篇文章</a>，简单易懂，十分详细。本文也是对这篇文章的补充与部分更改，因这篇文章的创作时间为2018年，距今已过太久，难免会有些东西在其中过时。于是便有了这篇博客，需要注意的是，这篇博客并不是<strong>完全从零开始的新手教学</strong>，而是对<a href="https://www.itbob.cn/article/002/">这篇文章</a>的<strong>补充与更改</strong>，所以请务必先阅读<a href="https://www.itbob.cn/article/002/">这篇文章</a>。</p>
+                <h1 id="Hexo博客的搭建与推送"><a href="#Hexo博客的搭建与推送" class="headerlink" title="Hexo博客的搭建与推送"></a>Hexo博客的搭建与推送</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>首先，需要阅读<a href="https://www.itbob.cn/article/002/">这篇文章</a>，简单易懂，十分详细。本文也是对这篇文章的补充与部分更改，因这篇文章的创作时间为2018年，距今已过太久，难免会有些东西在其中过时。于是便有了这篇博客，需要注意的是，这篇博客并不是<code>完全从零开始的新手教学</code>，而是对<a href="https://www.itbob.cn/article/002/">这篇文章</a>的<code>补充与更改</code>，所以请务必先阅读<a href="https://www.itbob.cn/article/002/">这篇文章</a>。</p>
 <p>另外，下文中所有的操作均在win10系统下操作，不涉及到其他系统的教学。</p>
 <p>方便起见，这篇文章：<a href="https://www.itbob.cn/article/002/">这篇文章</a>在下文中统称原文。</p>
 <h2 id="入门部分"><a href="#入门部分" class="headerlink" title="入门部分"></a>入门部分</h2><h3 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h3><p>随着时间变化，原文的git安装部分可以说是完全变了个样，下面是具体的变化和补充。</p>
@@ -260,6 +260,15 @@
 </ul>
 </blockquote>
 <h2 id="配置个性域名"><a href="#配置个性域名" class="headerlink" title="配置个性域名"></a>配置个性域名</h2><p>这里没什么问题，只要按着原文来做就好。只是有一点需要注意，在配置完域名解析后，需要十几二十分钟的时间来生效，如果没反应的话可以等等看。</p>
+<h2 id="网站加速和安全性"><a href="#网站加速和安全性" class="headerlink" title="网站加速和安全性"></a>网站加速和安全性</h2><p>  好了现在网站是配置完了，其他人也能看到了，但是如果现在打开网站看看，就会发现两问题。</p>
+<ol>
+<li>网站显示不安全，因为使用的协议为http协议，而非https协议。</li>
+<li>网站加载过慢，随便一张图片就需要好久才能加载出来。</li>
+</ol>
+<p>为了解决这两问题，我们需要修改默认的DNS服务器。这里有腾讯和cloudflare两家。推荐使用cloudflare的域名解析服务。在速度上和腾讯相差不大，更重要的是，它提供免费的服务，能将http转为https。这样一来，浏览器就不会再显示“不安全”的警告了。</p>
+<p>  关于教程，推荐这一篇。</p>
+<p>  <a href="https://zhuanlan.zhihu.com/p/369907876">独立站速度优化之Cloudflare CDN - 知乎 (zhihu.com)</a></p>
+<p>值得一提的是，这并不是立即生效的，需要一定的时间。即便在cloudflare上显示已经生效也是如此。</p>
 </li>
 </ul>
 
@@ -331,40 +340,6 @@
 
 
 
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
 
 
 
