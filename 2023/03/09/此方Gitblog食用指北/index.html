@@ -13,11 +13,11 @@
 
     <title>
         
-          Hexo博客的搭建与推送 - 赛博法师的博客 | Cyber Sorcerer&#39;s Blog
+          此方Gitblog推送姬食用指北 - 赛博法师的博客 | Cyber Sorcerer&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://cbcat.top/ZOUYIQAQ.github.io/2023/03/05/Hexo博客搭建流程/">
+    <link rel="canonical" href="https://cbcat.top/ZOUYIQAQ.github.io/2023/03/09/此方Gitblog食用指北/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -161,7 +161,7 @@
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
-        background-image: url('小弃05588314_p0.png')
+        background-image: url('泉此方封面.jpg')
     }
 </style>
 <header class="intro-header" >
@@ -175,12 +175,14 @@
                         
                           <a class="tag" href="/tags/#github" title="github">github</a>
                         
+                          <a class="tag" href="/tags/#指北" title="指北">指北</a>
+                        
                     </div>
-                    <h1>Hexo博客的搭建与推送</h1>
-                    <h2 class="subheading"></h2>
+                    <h1>此方Gitblog推送姬食用指北</h1>
+                    <h2 class="subheading">详细的指北</h2>
                     <span class="meta">
                         Posted by Lazy cat on
-                        2023-03-05
+                        2023-03-09
                     </span>
                 </div>
             </div>
@@ -199,76 +201,85 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="Hexo博客的搭建与推送"><a href="#Hexo博客的搭建与推送" class="headerlink" title="Hexo博客的搭建与推送"></a>Hexo博客的搭建与推送</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>首先，需要阅读<a target="_blank" rel="noopener" href="https://www.itbob.cn/article/002/">这篇文章</a>，简单易懂，十分详细。本文也是对这篇文章的补充与部分更改，因这篇文章的创作时间为2018年，距今已过太久，难免会有些东西在其中过时。于是便有了这篇博客，需要注意的是，这篇博客并不是<code>完全从零开始的新手教学</code>，而是对<a target="_blank" rel="noopener" href="https://www.itbob.cn/article/002/">这篇文章</a>的<code>补充与更改</code>，所以请务必先阅读<a target="_blank" rel="noopener" href="https://www.itbob.cn/article/002/">这篇文章</a>。</p>
-<p>另外，下文中所有的操作均在win10系统下操作，不涉及到其他系统的教学。</p>
-<p>方便起见，这篇文章：<a target="_blank" rel="noopener" href="https://www.itbob.cn/article/002/">这篇文章</a>在下文中统称原文。</p>
-<h2 id="入门部分"><a href="#入门部分" class="headerlink" title="入门部分"></a>入门部分</h2><h3 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h3><p>随着时间变化，原文的git安装部分可以说是完全变了个样，下面是具体的变化和补充。</p>
-<ul>
-<li><h4 id="选择版本和安装"><a href="#选择版本和安装" class="headerlink" title="选择版本和安装"></a>选择版本和安装</h4><p>点开原文中的Git 官网下载地址，可以看到以下界面：</p>
-<p><img src="image-20230304205306768.png" alt="image-20230304205306768"></p>
-<p>选择对应的操作系统后能看到以下界面：</p>
-<p><img src="image-20230304205600730.png" alt="image-20230304205600730"></p>
-<p>在其中，“click here to download”是下载最新版本的独立安装程序；“Standalone Installer”是独立安装程序；“Portable (“thumbdrive edition”)”是免安装绿色版本。选择自己中意的安装就好。这几种模式均具有我们搭建博客需要的所有功能，唯一的区别是独立安装版在安装后会在鼠标右键添加 Git GUI Here 和 Git Bash Here 两个选项，而免安装版则没有。只能通过解压后的git-bash.exe或git-cmd.exe运行。</p>
-<p>具体原因未知，我在安装独立安装版本时，电脑发生了蓝屏的情况，万幸的是电脑没有丢失任何数据，这一点需要注意。</p>
-<blockquote>
-<p>对于独立安装包可以参考这个教程，<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2099150">超详细 Git 安装教程</a></p>
-</blockquote>
-<blockquote>
-<p>免安装版实际上是一个压缩文件，按照提示解压即可。</p>
-</blockquote>
-<h2 id="部署至Github-Pages"><a href="#部署至Github-Pages" class="headerlink" title="部署至Github Pages"></a>部署至Github Pages</h2><ul>
-<li><h4 id="创建库"><a href="#创建库" class="headerlink" title="创建库"></a>创建库</h4></li>
-</ul>
-<p>Github的界面与几年前有了些改动，对于我这种第一次创建库的人来说，这一点小小的改动简直要了我的命。创建代码库的位置在主页的这里：</p>
-<p><img src="image-20230304211247921.png" alt="image-20230304211247921"></p>
+                <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ol>
+<li><p><a href="#%E4%B8%8B%E8%BD%BD">下载</a></p>
 </li>
-</ul>
-<p>同时，在创建代码库时，界面也稍有改动，只是原文中需要打勾的地方没了而已。</p>
-<ul>
-<li><h4 id="修改-config-yml文件"><a href="#修改-config-yml文件" class="headerlink" title="修改 _config.yml文件"></a>修改 _config.yml文件</h4><p>如图。</p>
-<p> <img src="image-20230304211917796.png" alt="image-20230304211917796"></p>
-<ul>
-<li><h4 id="推送至Github-Pages"><a href="#推送至Github-Pages" class="headerlink" title="推送至Github Pages"></a>推送至Github Pages</h4><p>不知道是不是因为软件更迭的原因，我在推送至Github Pages时没有遇到需要输入账号密码的步骤，但页面也仍然上传了。</p>
+<li><p><a href="#%E5%89%8D%E8%A8%80">前言</a></p>
 </li>
-</ul>
+<li><p><a href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">配置文件</a></p>
 </li>
-</ul>
-<h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><ul>
-<li><h4 id="更新后推送至Github-Pages"><a href="#更新后推送至Github-Pages" class="headerlink" title="更新后推送至Github Pages"></a>更新后推送至Github Pages</h4><p>这一步是我耗时最长的一步，主要原因是我的配置文件设置( _config.yml)错误。</p>
-<p>在我推送网页至Github Pages后打开发现页面可以打开，但图片和css样式却全部消失。搜索后发现可能的原因有</p>
-<ol>
-<li><p>js错误</p>
-</li>
-<li><p>图片和css文件位置错误</p>
-</li>
-<li><p>相对路径写成了绝对路径</p>
-<p>但我却发现上面三条的配置都没有问题，在纠结了好一阵后还是靠着cahtgpt才明白了来龙去脉。原因是配置文件中的这里写错了：</p>
-<p><img src="image-20230304214149174.png" alt="image-20230304214149174"></p>
-<p>对于这里，有几个个十分重要的点：</p>
+<li><p><a href="#%E6%9C%AC%E5%9C%B0%E6%B5%8B%E8%AF%95">本地测试</a></p>
 </li>
 </ol>
-</li>
-<li><p>对于url，最后的斜杠后要接上的是你的项目的名称，前面的只要能正常显示就不用管。</p>
-</li>
-<li><p>对于root，它代表的根目录，在更改之前，我的root为“\ZOUYIQAQ.github.io\”，而这显然是错误的，在我的文件中，文件定位从根目录开始，而不是“ZOUYIQAQ.github.io\”。</p>
-<p>所以对于在本地显示正常，但在线上就出现问题的情况就可以考虑这样做：</p>
-<blockquote>
+<hr>
+<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>请前往<a target="_blank" rel="noopener" href="https://github.com/ZOUYIQAQ/KonataGitBlog">github</a>下载，只支援win系统。</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这是为了方便上传blog到github而制作的粗劣应用，如果不幸遇到了bug，请联系我。</p>
+<p>程序使用pyside2编写，只是方便了执行命令和处理md文件而已。在将md文件移到博客内时，如果想要展示图片，就只能将图片放到和md文件同名的文件夹下。这一操作十分繁杂，于是就有了这个应用。同时增加了执行命令的功能。</p>
+<p>需要注意，程序不可以在含有中文的目录下运行。</p>
+<h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><p>在打开应用后，应该能看到以下界面：</p>
+<p><img src="image-20230309225907843.png" alt="image-20230309225907843"></p>
+<p>对于初次使用，需要打开配置文件选项并配置好基本设置，如下：</p>
+<p><img src="image-20230309230014980.png" alt="image-20230309230014980"></p>
 <ul>
-<li>首先，确定自己的文件使用的是相对路径还是绝对路径</li>
-<li>然后，检查文件是否在路径应有的位置。</li>
-<li>最后，更改文件或配置文件。</li>
+<li><p>博客位置：你的博客所在地，指的是有<img src="image-20230309230116436.png" alt="image-20230309230116436">这个文件的目录，同时，这个目录也应该还有这些文件夹：</p>
+<p><img src="image-20230309230249193.png" alt="image-20230309230249193"></p>
+</li>
+<li><p>Markdown文档位置：字面意思，markdown文件集中管理的地方。这个应用是以我的实际情况来编写的，在我的markdown文档集中文件夹中，有许多markdown文件和一些散乱的图片，这是为了之后的更新和还原本地md文件而准备的。大概就是如下的情况：</p>
+<p><img src="image-20230309230830418.png" alt="image-20230309230830418"></p>
+<p>文件夹是可有可无的，因为在之后应用的处理中会自动创建，而另一些图片则是md文件所依赖的图片。总的来说，如果想要使用之后的md文件处理的功能，只需要在填入的文件夹的位置存在md文件就好，这个文件夹的位置也可以随时变化，不用担心之后会无法使用。</p>
+</li>
+<li><p>git运行文件位置：在这个文件夹里，应该能看到如下的两个文件：</p>
+<p><img src="image-20230309231453288.png" alt="image-20230309231453288"></p>
+<p>第一个文件没有图标是一些我的个人问题，忽略就好，只要名字一样就可以。</p>
+</li>
+<li><p>具体Markdown文件的名字：这个是选填，也不会保存。在填后就会在处理md文件时只处理选填的文件。</p>
+<p>请注意，填写的md文件必须在填写的markdown文件夹下。</p>
+</li>
+<li><p>文件夹模式：在这个模式勾选后，点击本地测试的更新本地md文件时会先在本地生成一个和md文件名字相同的文件夹，同时会将此md文件中所有依赖的图片转移到对应文件夹里。然后将对应的图片和md文件统一复制到hexo博客放置md文件的位置。就是Hexo\source_posts这个文件夹下。</p>
+</li>
+<li><p>文件模式：唯一和文件夹模式不同的是，不会生成文件夹。需要注意的是，如果是已经经过了md文件处理的md文件，则需要先执行本地测试中的“还原md文件”。注意，对于处理模式的选择是不会保存的。</p>
+</li>
+<li><p>简略输出模式：在执行命令时，不会显示额外的内容，只会显示最基本的。</p>
+</li>
+<li><p>详细输出模式：会显示详细内容，包括程序执行的命令，系统返回的结果等，如下：</p>
+<p><img src="image-20230309232658372.png" alt="image-20230309232658372"></p>
+<p>简略模式则不会输出这些额外的内容。这个选项也不会保存。</p>
+</li>
+<li><p>md文件白名单管理：字面意思，打开后会弹出如下弹窗：</p>
+<p><img src="image-20230309232905448.png" alt="image-20230309232905448"></p>
+<p>支持直接拖拽文件获取路径，只支持*.md文件，在更改完后需要保存，否则就不会保存。</p>
+</li>
+<li><p>在输入完各个文件的位置后请注意保存，否则下次打开应用就需要重新输入。</p>
+</li>
 </ul>
-</blockquote>
-<h2 id="配置个性域名"><a href="#配置个性域名" class="headerlink" title="配置个性域名"></a>配置个性域名</h2><p>这里没什么问题，只要按着原文来做就好。只是有一点需要注意，在配置完域名解析后，需要十几二十分钟的时间来生效，如果没反应的话可以等等看。</p>
-<h2 id="网站加速和安全性"><a href="#网站加速和安全性" class="headerlink" title="网站加速和安全性"></a>网站加速和安全性</h2><p>  好了现在网站是配置完了，其他人也能看到了，但是如果现在打开网站看看，就会发现两问题。</p>
-<ol>
-<li>网站显示不安全，因为使用的协议为http协议，而非https协议。</li>
-<li>网站加载过慢，随便一张图片就需要好久才能加载出来。</li>
-</ol>
-<p>为了解决这两问题，我们需要修改默认的DNS服务器。这里有腾讯和cloudflare两家。推荐使用cloudflare的域名解析服务。在速度上和腾讯相差不大，更重要的是，它提供免费的服务，能将http转为https。这样一来，浏览器就不会再显示“不安全”的警告了。</p>
-<p>  关于教程，推荐这一篇。</p>
-<p>  <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/369907876">独立站速度优化之Cloudflare CDN - 知乎 (zhihu.com)</a></p>
-<p>值得一提的是，这并不是立即生效的，需要一定的时间。即便在cloudflare上显示已经生效也是如此。</p>
+<h1 id="本地测试"><a href="#本地测试" class="headerlink" title="本地测试"></a>本地测试</h1><ul>
+<li><p>执行命令：字面意思，程序会执行输入的命令，默认运行的文件夹位置是在填入的hexo博客处。如下：</p>
+<p><img src="image-20230309233409252.png" alt="image-20230309233409252"></p>
+<p>这是主要功能之一，在搭建博客时我便对git无法使用“ctrl+c”而深感苦恼，这里支持使用复制，不会乱码。且可以一次执行多个命令，需要注意的是，如果执行了“hexo s”则需要点击结束运行本地博客后才能继续。且在执行命令后，在命令执行完毕前尽量不要进行其他动作，这是不安全的行为。在打开详细模式后会看到更多显示，如下：</p>
+<p><img src="image-20230309233837198.png" alt="image-20230309233837198"></p>
+</li>
+<li><p>更新本地文件：本质是执行”hexo c &amp;&amp; hexo g”</p>
+</li>
+<li><p>更新githbu端博客文件：本质是执行”hexo d”</p>
+</li>
+<li><p>运行本地博客：本质是执行”hexo s”</p>
+</li>
+<li><p>结束运行本地博客：本质是找到通过控制台找到占用对应4000端口的程序，然后关闭。</p>
+</li>
+<li><p>强行停止命令执行：很不安全的行为！如果不是实在没有办法就不要点击这个，它会强行结束掉所有与python相关的和占用4000端口的程序。</p>
+</li>
+<li><p>更新本地md文件：在没有填写具体md文件名字的情况下，它会处理所有填写在Markdown文档位置的md文件。会寻找md文案，然后找到依赖的图片文件，最后将图片放在同名文件夹里（图片必须在当前文件夹，否则会跳过此图片）。之后再将md文件和对应图片复制到博客对应的文件夹下。</p>
+<p>在填写md文件名字后就只会处理填了名字的唯一文件了。请注意，填写的md文件必须在填写的markdown文件夹下。</p>
+<p>效果展示，处理之前：</p>
+<p><img src="image-20230310125435700.png" alt="image-20230310125435700"></p>
+<p>处理之后：</p>
+<p><img src="image-20230310125508825.png" alt="image-20230310125508825"></p>
+</li>
+<li><p>还原本地md文件：在没有填写具体md文件名字的情况下，它会处理所有填写在Markdown文档位置的md文件。将对应md文件中依赖的图片从文件夹里复制到当前文件夹下。如图：</p>
+<p><img src="image-20230310125713503.png" alt="image-20230310125713503"></p>
+<p>与还原之前的唯一区别是多了两个文件夹，在再次进行md文件处理后，这些零散的图片就会被清空和整理，变成如上面图片一样的被处理的状态。</p>
+<p>对于博客文件夹内的md文件则不会处理。</p>
+<p>这也是这个程序的主要功能，在编写md文档后，如果想要再次修改，就需要麻烦地反复移动md文件依赖的图片。但在使用这个之后就不用总是在图片的海洋中遨游了。</p>
 </li>
 </ul>
 
@@ -279,13 +290,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2023/03/09/此方Gitblog食用指北/" data-toggle="tooltip" data-placement="top" title="此方Gitblog推送姬食用指北">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2023/03/04/hello-world/" data-toggle="tooltip" data-placement="top" title="Hello World">Next Post &rarr;</a>
+                            <a href="/2023/03/05/Hexo博客搭建流程/" data-toggle="tooltip" data-placement="top" title="Hexo博客的搭建与推送">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -315,6 +322,8 @@
                           <a class="tag" href="/tags/#git" title="git">git</a>
                         
                           <a class="tag" href="/tags/#github" title="github">github</a>
+                        
+                          <a class="tag" href="/tags/#指北" title="指北">指北</a>
                         
                     </div>
                 </section>
