@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          数据挖掘入门练习下-b站三体案例 - 赛博法师的幻想乡 | Cyber Sorcerer&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://cbcat.top/ZOUYIQAQ.github.io/2023/03/19/数据挖掘入门下-b站三体案例/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/hux-blog.min.css">
+
+
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Cyber Sorcerer&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://cbcat.top/ZOUYIQAQ.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('まごつき_海.png')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#pandas" title="pandas">pandas</a>
+                        
+                          <a class="tag" href="/tags/#numpy" title="numpy">numpy</a>
+                        
+                          <a class="tag" href="/tags/#matplotlib" title="matplotlib">matplotlib</a>
+                        
+                    </div>
+                    <h1>数据挖掘入门练习下-b站三体案例</h1>
+                    <h2 class="subheading">数据处理阶段</h2>
+                    <span class="meta">
+                        Posted by Lazy cat on
+                        2023-03-19
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="再次确定目标"><a href="#再次确定目标" class="headerlink" title="再次确定目标"></a>再次确定目标</h1><ul>
+<li><a href="#%E6%AF%8F%E4%B8%AA%E8%AF%84%E5%88%86%E6%AE%B5%E4%B8%8E%E8%AF%84%E5%88%86%E4%BA%BA%E7%AD%89%E7%BA%A7%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB">每个评分段与评分人等级间的关系</a><ul>
+<li>饼图-详细展示每个评分段情况</li>
+</ul>
+</li>
+<li><a href="#%E8%AF%84%E5%88%86%E9%9A%8F%E9%9B%86%E6%95%B0%E7%9A%84%E5%8F%98%E5%8C%96">评分随集数的变化 </a><ul>
+<li>折线图 x-集数 y-评分</li>
+</ul>
+</li>
+<li><a href="#%E8%AF%84%E5%88%86%E9%9A%8F%E6%97%B6%E9%97%B4%E7%9A%84%E5%8F%98%E5%8C%96">评分随时间的变化</a><ul>
+<li>折线图 x-时间 y-评分</li>
+</ul>
+</li>
+<li><a href="#%E8%AF%84%E5%88%86%E7%9A%84%E6%80%BB%E4%BD%93%E6%83%85%E5%86%B5">评分的总体情况</a><ul>
+<li>饼图</li>
+</ul>
+</li>
+<li><a href="#%E6%AF%8F%E9%9B%86%E7%9A%84%E8%AF%84%E5%88%86%E5%8D%A0%E6%AF%94">每集的评分占比</a><ul>
+<li>饼图</li>
+</ul>
+</li>
+<li><a href="#%E6%AF%8F%E9%9B%86%E7%9A%84%E8%AF%84%E5%88%86%E4%BA%BA%E7%AD%89%E7%BA%A7%E5%8D%A0%E6%AF%94">每集的评分人等级占比</a><ul>
+<li>饼图</li>
+</ul>
+</li>
+<li><a href="#%E8%AF%84%E5%88%86%E4%BA%BA%E7%AD%89%E7%BA%A7%E7%9A%84%E6%80%BB%E4%BD%93%E5%88%86%E5%B8%83">评分人等级的总体分布</a><ul>
+<li>饼图</li>
+</ul>
+</li>
+<li><a href="#%E8%AF%84%E5%88%86%E6%95%B0%E9%87%8F%E4%B8%8E%E6%97%B6%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB">评分数量与时间的关系</a><ul>
+<li>折线图 x-时间 y-数量</li>
+</ul>
+</li>
+<li><a href="#%E8%AF%84%E5%88%86%E9%87%8F%E4%B8%8E%E9%9B%86%E6%95%B0%E7%9A%84%E5%85%B3%E7%B3%BB">评分量与集数的关系</a><ul>
+<li>折线图 x-集数 y-数量</li>
+</ul>
+</li>
+</ul>
+<h1 id="导入好多好多库"><a href="#导入好多好多库" class="headerlink" title="导入好多好多库"></a>导入好多好多库</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br></pre></td></tr></table></figure>
+
+<h1 id="基础起手"><a href="#基础起手" class="headerlink" title="基础起手"></a>基础起手</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更改字体防止乱码</span></span><br><span class="line">plt.rcParams[<span class="string">&quot;font.sans-serif&quot;</span>] = [<span class="string">&quot;SimHei&quot;</span>]</span><br><span class="line">plt.rcParams[<span class="string">&quot;axes.unicode_minus&quot;</span>] = <span class="literal">False</span></span><br><span class="line"><span class="comment"># 读取数据</span></span><br><span class="line">data = pd.read_csv(<span class="string">&#x27;3body_score_data.csv&#x27;</span>)</span><br><span class="line">data = data.set_index(<span class="string">&#x27;uname&#x27;</span>, drop=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="每个评分段与评分人等级间的关系"><a href="#每个评分段与评分人等级间的关系" class="headerlink" title="每个评分段与评分人等级间的关系"></a>每个评分段与评分人等级间的关系</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 每个评分段与评分人等级间的关系</span></span><br><span class="line"><span class="comment"># 饼图-详细展示每个评分段情况</span></span><br><span class="line">score_name = [<span class="string">f&#x27;<span class="subst">&#123;i&#125;</span>分&#x27;</span> <span class="keyword">for</span> i <span class="keyword">in</span> data[<span class="string">&quot;score&quot;</span>].sort_values().unique() <span class="keyword">if</span> <span class="keyword">not</span> np.isnan(i) <span class="keyword">and</span> i % <span class="number">2.0</span> == <span class="number">0</span> <span class="keyword">and</span> i != <span class="number">0</span>]</span><br><span class="line">figure, axes = plt.subplots(nrows=<span class="number">1</span>, ncols=<span class="built_in">len</span>(score_name), figsize=(<span class="number">35</span>, <span class="number">8</span>), dpi=<span class="number">80</span>)</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(score_name)):</span><br><span class="line">    level_data = []</span><br><span class="line">    level_name = []</span><br><span class="line">    score = re.findall(<span class="string">r&#x27;(\d+?)\.&#x27;</span>, score_name[line])[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">for</span> level <span class="keyword">in</span> data[<span class="string">&#x27;level&#x27;</span>].unique():</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">str</span>(level).isdigit() <span class="keyword">and</span> <span class="built_in">int</span>(level) &gt;= <span class="number">4</span>:</span><br><span class="line">            condition = <span class="string">f&#x27;level==&quot;<span class="subst">&#123;<span class="built_in">str</span>(level)&#125;</span>&quot; and score==<span class="subst">&#123;<span class="built_in">float</span>(score)&#125;</span>&#x27;</span></span><br><span class="line">            level_data.append(data.query(condition).size)</span><br><span class="line">            level_name.append(<span class="string">f&#x27;<span class="subst">&#123;level&#125;</span>级&#x27;</span>)</span><br><span class="line">    axes[line].pie(level_data, labels=level_name, autopct=<span class="string">&#x27;%1.2f%%&#x27;</span>)</span><br><span class="line">    axes[line].legend(loc=<span class="string">&#x27;lower right&#x27;</span>)</span><br><span class="line">    axes[line].set_title(<span class="string">f&#x27;评分为<span class="subst">&#123;score&#125;</span>的等级分布情况&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p><img src="image-20230319230013412.png" alt="image-20230319230013412"></p>
+<h1 id="评分随集数的变化"><a href="#评分随集数的变化" class="headerlink" title="评分随集数的变化"></a>评分随集数的变化</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 评分随集数的变化</span></span><br><span class="line"><span class="comment"># 折线图 x-集数 y-评分</span></span><br><span class="line">new_data = data.dropna(axis=<span class="number">0</span>, how=<span class="string">&#x27;any&#x27;</span>)</span><br><span class="line">progress = pd.Series(new_data[<span class="string">&#x27;progress&#x27;</span>]).tolist()</span><br><span class="line">vice_list = []</span><br><span class="line"><span class="comment"># 处理含有数字的数据</span></span><br><span class="line"><span class="keyword">for</span> p <span class="keyword">in</span> progress:</span><br><span class="line">    num = re.findall(<span class="string">r&#x27;\d+?&#x27;</span>, p)</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">not</span> num) <span class="keyword">or</span> (<span class="string">&#x27;集&#x27;</span><span class="keyword">not</span> <span class="keyword">in</span> p <span class="keyword">and</span> <span class="string">&#x27;话&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> p):</span><br><span class="line">        vice_list.append(p)</span><br><span class="line">vice_list = <span class="built_in">list</span>(<span class="built_in">set</span>(vice_list))</span><br><span class="line"><span class="comment"># 处理无效数据（只看到预告的）</span></span><br><span class="line">new_data = new_data.copy()</span><br><span class="line"><span class="comment"># 删除dataframe中的无效数据</span></span><br><span class="line">new_data = new_data.drop(index=new_data[new_data[<span class="string">&#x27;progress&#x27;</span>].isin(vice_list)].index, axis=<span class="number">0</span>)</span><br><span class="line">progress = pd.Series(new_data[<span class="string">&#x27;progress&#x27;</span>]).tolist()</span><br><span class="line">progress = [p <span class="keyword">for</span> p <span class="keyword">in</span> progress <span class="keyword">if</span> p <span class="keyword">not</span> <span class="keyword">in</span> vice_list]</span><br><span class="line"><span class="keyword">for</span> p <span class="keyword">in</span> progress:</span><br><span class="line">    num = re.findall(<span class="string">r&#x27;\d+?&#x27;</span>, p)</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;预告&#x27;</span> <span class="keyword">in</span> p:</span><br><span class="line">        progress[progress.index(p)] = <span class="built_in">int</span>(num[<span class="number">0</span>]) - <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        progress[progress.index(p)] = <span class="built_in">int</span>(num[<span class="number">0</span>])</span><br><span class="line">new_data[<span class="string">&#x27;progress&#x27;</span>] = progress</span><br><span class="line"><span class="comment"># 开始分组处理数据</span></span><br><span class="line">group = new_data.groupby(<span class="string">&#x27;progress&#x27;</span>)[<span class="string">&#x27;score&#x27;</span>].mean().expanding().mean().plot(xticks=new_data[<span class="string">&#x27;progress&#x27;</span>].unique())</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p><img src="image-20230319230629669.png" alt="image-20230319230629669"></p>
+<h1 id="评分随时间的变化"><a href="#评分随时间的变化" class="headerlink" title="评分随时间的变化"></a>评分随时间的变化</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 评分随时间的变化</span></span><br><span class="line"><span class="comment"># 折线图 x-时间 y-评分</span></span><br><span class="line">plt.figure(figsize=(<span class="number">20</span>, <span class="number">15</span>), dpi=<span class="number">80</span>)</span><br><span class="line"><span class="comment"># 删除原数据中日期含有空值的行</span></span><br><span class="line">new_data = data.dropna(axis=<span class="number">0</span>, how=<span class="string">&#x27;any&#x27;</span>, subset=<span class="string">&#x27;push_time_str&#x27;</span>, inplace=<span class="literal">False</span>)</span><br><span class="line">now_time = pd.Series.tolist(new_data[<span class="string">&#x27;push_time_str&#x27;</span>])</span><br><span class="line"><span class="comment"># 处理时间，统一格式</span></span><br><span class="line">change = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> e_time <span class="keyword">in</span> now_time:</span><br><span class="line">    <span class="keyword">if</span> re.<span class="keyword">match</span>(<span class="string">r&#x27;^\d*?月\d*?日&#x27;</span>, e_time) <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">        change[e_time] = <span class="string">&#x27;2023年&#x27;</span> + e_time</span><br><span class="line"><span class="comment"># 找出最大的时间</span></span><br><span class="line">max_time = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> _, time_ <span class="keyword">in</span> change.items():</span><br><span class="line">    <span class="keyword">if</span> time.mktime(time.strptime(time_, <span class="string">&#x27;%Y年%m月%d日&#x27;</span>)) &gt; max_time:</span><br><span class="line">        max_time = <span class="built_in">int</span>(time.mktime(time.strptime(time_, <span class="string">&#x27;%Y年%m月%d日&#x27;</span>)))</span><br><span class="line">day_num = time.strftime(<span class="string">&#x27;%Y年%m月%d日&#x27;</span>, time.localtime(max_time))</span><br><span class="line"><span class="comment"># 定义方便处理的函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">add_time</span>(<span class="params">day=<span class="number">1</span></span>):</span><br><span class="line">    <span class="keyword">global</span> day_num</span><br><span class="line">    data_time = datetime.datetime.strptime(day_num, <span class="string">&#x27;%Y年%m月%d日&#x27;</span>)</span><br><span class="line">    data_time += datetime.timedelta(days=day)</span><br><span class="line">    <span class="keyword">return</span> data_time.strftime(<span class="string">&#x27;%Y年%m月%d日&#x27;</span>)</span><br><span class="line"><span class="comment"># 处理刁钻时间</span></span><br><span class="line"><span class="keyword">for</span> e_time <span class="keyword">in</span> now_time:</span><br><span class="line">    <span class="keyword">if</span> e_time == <span class="string">&#x27;3天前&#x27;</span>:</span><br><span class="line">        change[e_time] = add_time()</span><br><span class="line">    <span class="keyword">elif</span> e_time == <span class="string">&#x27;2天前&#x27;</span>:</span><br><span class="line">        change[e_time] = add_time(<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">elif</span> e_time == <span class="string">&#x27;1天前&#x27;</span>:</span><br><span class="line">        change[e_time] = add_time(<span class="number">3</span>)</span><br><span class="line">    <span class="keyword">elif</span> <span class="string">&#x27;前&#x27;</span> <span class="keyword">in</span> e_time <span class="keyword">and</span> <span class="string">&#x27;小时&#x27;</span> <span class="keyword">in</span> e_time:</span><br><span class="line">        change[e_time] = add_time(<span class="number">5</span>)</span><br><span class="line">    <span class="keyword">elif</span> <span class="string">&#x27;昨天&#x27;</span> <span class="keyword">in</span> e_time:</span><br><span class="line">        change[e_time] = add_time(<span class="number">4</span>)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">del_dictionary</span>(<span class="params">name, value</span>):</span><br><span class="line">    index_num = now_time.index(name)</span><br><span class="line">    now_time[index_num] = value</span><br><span class="line">    <span class="keyword">if</span> name <span class="keyword">in</span> now_time:</span><br><span class="line">        <span class="keyword">return</span> del_dictionary(name, value)</span><br><span class="line"><span class="comment"># 处理数据，赋值正确时间给列表</span></span><br><span class="line"><span class="keyword">for</span> name, value <span class="keyword">in</span> change.items():</span><br><span class="line">    del_dictionary(name, value)</span><br><span class="line"><span class="comment"># 删除自己和dataframe中时间格式不正确的数据行</span></span><br><span class="line"><span class="comment"># 复制数据以防警告</span></span><br><span class="line">new_data = new_data.copy()</span><br><span class="line"><span class="keyword">for</span> e_time <span class="keyword">in</span> now_time:</span><br><span class="line">    <span class="keyword">if</span> re.<span class="keyword">match</span>(<span class="string">r&#x27;^\d*?年\d*?月\d*?日&#x27;</span>, e_time) <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        index_num = now_time.index(e_time)</span><br><span class="line">        new_data.drop(index=new_data.iloc[[index_num], :].index, axis=<span class="number">0</span>,  inplace=<span class="literal">True</span>)</span><br><span class="line">        now_time.remove(e_time)</span><br><span class="line"><span class="comment"># 最后检查</span></span><br><span class="line"><span class="keyword">for</span> e_time <span class="keyword">in</span> now_time:</span><br><span class="line">    <span class="keyword">if</span> re.<span class="keyword">match</span>(<span class="string">r&#x27;^\d*?年\d*?月\d*?日&#x27;</span>, e_time) <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="built_in">print</span>(e_time)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;now_time.index(e_time)&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="comment"># 将列表赋给dataframe</span></span><br><span class="line">new_data[<span class="string">&#x27;push_time_str&#x27;</span>] = now_time</span><br><span class="line"><span class="comment"># 分组并画图</span></span><br><span class="line">new_data[<span class="string">&#x27;push_time_str&#x27;</span>] = pd.to_datetime(new_data[<span class="string">&#x27;push_time_str&#x27;</span>], <span class="built_in">format</span>=<span class="string">&#x27;%Y年%m月%d日&#x27;</span>)</span><br><span class="line">new_data.sort_values(by=<span class="string">&#x27;push_time_str&#x27;</span>)</span><br><span class="line">new_data.set_index(<span class="string">&#x27;push_time_str&#x27;</span>, inplace=<span class="literal">True</span>)</span><br><span class="line">group = new_data.groupby(<span class="string">&#x27;push_time_str&#x27;</span>)[<span class="string">&#x27;score&#x27;</span>].mean().expanding().mean().plot()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<p><img src="image-20230319230223070.png" alt="image-20230319230223070"></p>
+<h1 id="评分的总体情况"><a href="#评分的总体情况" class="headerlink" title="评分的总体情况"></a>评分的总体情况</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 评分的总体情况</span></span><br><span class="line"><span class="comment"># 饼图</span></span><br><span class="line">new_data = data.dropna(axis=<span class="number">0</span>, how=<span class="string">&#x27;any&#x27;</span>)</span><br><span class="line">group = new_data.groupby(<span class="string">&#x27;score&#x27;</span>)[<span class="string">&#x27;score&#x27;</span>].size()</span><br><span class="line">draw = plt.figure(figsize=(<span class="number">15</span>, <span class="number">15</span>), dpi=<span class="number">80</span>)</span><br><span class="line">plt.pie(group, labels=group.index, autopct=<span class="string">&#x27;%1.2f%%&#x27;</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.title(<span class="string">&#x27;总体评分&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p><img src="image-20230319230758763.png" alt="image-20230319230758763"></p>
+<h1 id="每集的评分占比"><a href="#每集的评分占比" class="headerlink" title="每集的评分占比"></a>每集的评分占比</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 每集的评分占比</span></span><br><span class="line"><span class="comment"># 饼图</span></span><br><span class="line"><span class="comment"># 处理追番进度</span></span><br><span class="line">new_data = data.dropna(axis=<span class="number">0</span>, how=<span class="string">&#x27;any&#x27;</span>)</span><br><span class="line">progress = pd.Series(new_data[<span class="string">&#x27;progress&#x27;</span>]).tolist()</span><br><span class="line">vice_list = []</span><br><span class="line"><span class="comment"># 处理含有数字的数据</span></span><br><span class="line"><span class="keyword">for</span> p <span class="keyword">in</span> progress:</span><br><span class="line">    num = re.findall(<span class="string">r&#x27;\d+?&#x27;</span>, p)</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">not</span> num) <span class="keyword">or</span> (<span class="string">&#x27;集&#x27;</span><span class="keyword">not</span> <span class="keyword">in</span> p <span class="keyword">and</span> <span class="string">&#x27;话&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> p):</span><br><span class="line">        vice_list.append(p)</span><br><span class="line">vice_list = <span class="built_in">list</span>(<span class="built_in">set</span>(vice_list))</span><br><span class="line"><span class="comment"># 处理无效数据（只看到预告的）</span></span><br><span class="line">new_data = new_data.copy()</span><br><span class="line"><span class="comment"># 删除dataframe中的无效数据</span></span><br><span class="line">new_data = new_data.drop(index=new_data[new_data[<span class="string">&#x27;progress&#x27;</span>].isin(vice_list)].index, axis=<span class="number">0</span>)</span><br><span class="line">progress = pd.Series(new_data[<span class="string">&#x27;progress&#x27;</span>]).tolist()</span><br><span class="line">progress = [p <span class="keyword">for</span> p <span class="keyword">in</span> progress <span class="keyword">if</span> p <span class="keyword">not</span> <span class="keyword">in</span> vice_list]</span><br><span class="line"><span class="keyword">for</span> p <span class="keyword">in</span> progress:</span><br><span class="line">    num = re.findall(<span class="string">r&#x27;\d+?&#x27;</span>, p)</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;预告&#x27;</span> <span class="keyword">in</span> p:</span><br><span class="line">        progress[progress.index(p)] = <span class="built_in">int</span>(num[<span class="number">0</span>]) - <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        progress[progress.index(p)] = <span class="built_in">int</span>(num[<span class="number">0</span>])</span><br><span class="line">new_data[<span class="string">&#x27;progress&#x27;</span>] = progress</span><br><span class="line">new_data = new_data.copy()</span><br><span class="line">new_data.drop(index=new_data[new_data[<span class="string">&#x27;score&#x27;</span>] == <span class="built_in">float</span>(<span class="number">0</span>)].index, axis=<span class="number">0</span>,  inplace=<span class="literal">True</span>)</span><br><span class="line">progress_list = pd.Series(new_data[<span class="string">&#x27;progress&#x27;</span>].sort_values().unique()).tolist()</span><br><span class="line">figure, axes = plt.subplots(nrows=<span class="number">1</span>, ncols=<span class="built_in">len</span>(progress_list), figsize=(<span class="number">60</span>, <span class="number">8</span>), dpi=<span class="number">80</span>)</span><br><span class="line">colors = [<span class="string">&#x27;C0&#x27;</span>, <span class="string">&#x27;C1&#x27;</span>, <span class="string">&#x27;C2&#x27;</span>, <span class="string">&#x27;C3&#x27;</span>, <span class="string">&#x27;C4&#x27;</span>, <span class="string">&#x27;C5&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> p <span class="keyword">in</span> progress_list:</span><br><span class="line">    data_num = new_data[new_data[<span class="string">&#x27;progress&#x27;</span>] == p].sort_values(by=<span class="string">&#x27;score&#x27;</span>)</span><br><span class="line">    num_group = data_num.groupby(<span class="string">&#x27;score&#x27;</span>)[<span class="string">&#x27;score&#x27;</span>].size()</span><br><span class="line">    axes[progress_list.index(p)].pie(num_group, labels=data_num[<span class="string">&#x27;score&#x27;</span>].sort_values().unique(), autopct=<span class="string">&#x27;%1.2f%%&#x27;</span>, colors=colors)</span><br><span class="line">    axes[progress_list.index(p)].set_title(<span class="string">f&#x27;第<span class="subst">&#123;p&#125;</span>集&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p><img src="image-20230319230924538.png" alt="image-20230319230924538"></p>
+<h1 id="每集的评分人等级占比"><a href="#每集的评分人等级占比" class="headerlink" title="每集的评分人等级占比"></a>每集的评分人等级占比</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 每集的评分人等级占比</span></span><br><span class="line"><span class="comment"># 饼图</span></span><br><span class="line"><span class="comment"># 处理追番进度</span></span><br><span class="line">new_data = data.dropna(axis=<span class="number">0</span>, how=<span class="string">&#x27;any&#x27;</span>)</span><br><span class="line">progress = pd.Series(new_data[<span class="string">&#x27;progress&#x27;</span>]).tolist()</span><br><span class="line">vice_list = []</span><br><span class="line"><span class="comment"># 处理含有数字的数据</span></span><br><span class="line"><span class="keyword">for</span> p <span class="keyword">in</span> progress:</span><br><span class="line">    num = re.findall(<span class="string">r&#x27;\d+?&#x27;</span>, p)</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">not</span> num) <span class="keyword">or</span> (<span class="string">&#x27;集&#x27;</span><span class="keyword">not</span> <span class="keyword">in</span> p <span class="keyword">and</span> <span class="string">&#x27;话&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> p):</span><br><span class="line">        vice_list.append(p)</span><br><span class="line">vice_list = <span class="built_in">list</span>(<span class="built_in">set</span>(vice_list))</span><br><span class="line"><span class="comment"># 处理无效数据（只看到预告的）</span></span><br><span class="line">new_data = new_data.copy()</span><br><span class="line"><span class="comment"># 删除dataframe中的无效数据</span></span><br><span class="line">new_data = new_data.drop(index=new_data[new_data[<span class="string">&#x27;progress&#x27;</span>].isin(vice_list)].index, axis=<span class="number">0</span>)</span><br><span class="line">progress = pd.Series(new_data[<span class="string">&#x27;progress&#x27;</span>]).tolist()</span><br><span class="line">progress = [p <span class="keyword">for</span> p <span class="keyword">in</span> progress <span class="keyword">if</span> p <span class="keyword">not</span> <span class="keyword">in</span> vice_list]</span><br><span class="line"><span class="keyword">for</span> p <span class="keyword">in</span> progress:</span><br><span class="line">    num = re.findall(<span class="string">r&#x27;\d+?&#x27;</span>, p)</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;预告&#x27;</span> <span class="keyword">in</span> p:</span><br><span class="line">        progress[progress.index(p)] = <span class="built_in">int</span>(num[<span class="number">0</span>]) - <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        progress[progress.index(p)] = <span class="built_in">int</span>(num[<span class="number">0</span>])</span><br><span class="line">new_data[<span class="string">&#x27;progress&#x27;</span>] = progress</span><br><span class="line">new_data = new_data.copy()</span><br><span class="line">new_data.drop(index=new_data.query(<span class="string">&#x27;level == &quot;0&quot; or level == &quot;None&quot;&#x27;</span>).index, axis=<span class="number">0</span>,  inplace=<span class="literal">True</span>)</span><br><span class="line">progress_list = pd.Series(new_data[<span class="string">&#x27;progress&#x27;</span>].sort_values().unique()).tolist()</span><br><span class="line">figure, axes = plt.subplots(nrows=<span class="number">1</span>, ncols=<span class="built_in">len</span>(progress_list), figsize=(<span class="number">60</span>, <span class="number">8</span>), dpi=<span class="number">80</span>)</span><br><span class="line">colors = [<span class="string">&#x27;C0&#x27;</span>, <span class="string">&#x27;C1&#x27;</span>, <span class="string">&#x27;C2&#x27;</span>, <span class="string">&#x27;C3&#x27;</span>, <span class="string">&#x27;C4&#x27;</span>, <span class="string">&#x27;C5&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> p <span class="keyword">in</span> progress_list:</span><br><span class="line">    data_num = new_data[new_data[<span class="string">&#x27;progress&#x27;</span>] == p].sort_values(by=<span class="string">&#x27;level&#x27;</span>)</span><br><span class="line">    num_group = data_num.groupby(<span class="string">&#x27;level&#x27;</span>)[<span class="string">&#x27;level&#x27;</span>].size()</span><br><span class="line">    axes[progress_list.index(p)].pie(num_group, labels=data_num[<span class="string">&#x27;level&#x27;</span>].sort_values().unique(), autopct=<span class="string">&#x27;%1.2f%%&#x27;</span>, colors=colors)</span><br><span class="line">    axes[progress_list.index(p)].set_title(<span class="string">f&#x27;第<span class="subst">&#123;p&#125;</span>集&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p><img src="image-20230319231022275.png" alt="image-20230319231022275"></p>
+<h1 id="评分人等级的总体分布"><a href="#评分人等级的总体分布" class="headerlink" title="评分人等级的总体分布"></a>评分人等级的总体分布</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 评分人等级的总体分布</span></span><br><span class="line"><span class="comment"># 饼图</span></span><br><span class="line">new_data = data.dropna(inplace=<span class="literal">False</span>, how=<span class="string">&#x27;any&#x27;</span>, axis=<span class="number">0</span>)</span><br><span class="line">new_data = new_data.copy()</span><br><span class="line">new_data.drop(index=new_data.query(<span class="string">&#x27;level == &quot;0&quot; or level == &quot;None&quot;&#x27;</span>).index, inplace=<span class="literal">True</span>, axis=<span class="number">0</span>)</span><br><span class="line">group = new_data.groupby(<span class="string">&#x27;level&#x27;</span>)[<span class="string">&#x27;level&#x27;</span>].size().plot(kind=<span class="string">&#x27;pie&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p><img src="image-20230319231113902.png" alt="image-20230319231113902"></p>
+<h1 id="评分数量与时间的关系"><a href="#评分数量与时间的关系" class="headerlink" title="评分数量与时间的关系"></a>评分数量与时间的关系</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 评分数量与时间的关系</span></span><br><span class="line"><span class="comment"># 折线图 x-时间 y-数量</span></span><br><span class="line"><span class="comment"># 删除原数据中日期含有空值的行</span></span><br><span class="line">new_data = data.dropna(axis=<span class="number">0</span>, how=<span class="string">&#x27;any&#x27;</span>, subset=<span class="string">&#x27;push_time_str&#x27;</span>, inplace=<span class="literal">False</span>)</span><br><span class="line">now_time = pd.Series.tolist(new_data[<span class="string">&#x27;push_time_str&#x27;</span>])</span><br><span class="line"><span class="comment"># 处理时间，统一格式</span></span><br><span class="line">change = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> e_time <span class="keyword">in</span> now_time:</span><br><span class="line">    <span class="keyword">if</span> re.<span class="keyword">match</span>(<span class="string">r&#x27;^\d*?月\d*?日&#x27;</span>, e_time) <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">        change[e_time] = <span class="string">&#x27;2023年&#x27;</span> + e_time</span><br><span class="line"><span class="comment"># 找出最大的时间</span></span><br><span class="line">max_time = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> _, time_ <span class="keyword">in</span> change.items():</span><br><span class="line">    <span class="keyword">if</span> time.mktime(time.strptime(time_, <span class="string">&#x27;%Y年%m月%d日&#x27;</span>)) &gt; max_time:</span><br><span class="line">        max_time = <span class="built_in">int</span>(time.mktime(time.strptime(time_, <span class="string">&#x27;%Y年%m月%d日&#x27;</span>)))</span><br><span class="line">day_num = time.strftime(<span class="string">&#x27;%Y年%m月%d日&#x27;</span>, time.localtime(max_time))</span><br><span class="line"><span class="comment"># 定义方便处理的函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">add_time</span>(<span class="params">day=<span class="number">1</span></span>):</span><br><span class="line">    <span class="keyword">global</span> day_num</span><br><span class="line">    data_time = datetime.datetime.strptime(day_num, <span class="string">&#x27;%Y年%m月%d日&#x27;</span>)</span><br><span class="line">    data_time += datetime.timedelta(days=day)</span><br><span class="line">    <span class="keyword">return</span> data_time.strftime(<span class="string">&#x27;%Y年%m月%d日&#x27;</span>)</span><br><span class="line"><span class="comment"># 处理刁钻时间</span></span><br><span class="line"><span class="keyword">for</span> e_time <span class="keyword">in</span> now_time:</span><br><span class="line">    <span class="keyword">if</span> e_time == <span class="string">&#x27;3天前&#x27;</span>:</span><br><span class="line">        change[e_time] = add_time()</span><br><span class="line">    <span class="keyword">elif</span> e_time == <span class="string">&#x27;2天前&#x27;</span>:</span><br><span class="line">        change[e_time] = add_time(<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">elif</span> e_time == <span class="string">&#x27;1天前&#x27;</span>:</span><br><span class="line">        change[e_time] = add_time(<span class="number">3</span>)</span><br><span class="line">    <span class="keyword">elif</span> <span class="string">&#x27;前&#x27;</span> <span class="keyword">in</span> e_time <span class="keyword">and</span> <span class="string">&#x27;小时&#x27;</span> <span class="keyword">in</span> e_time:</span><br><span class="line">        change[e_time] = add_time(<span class="number">5</span>)</span><br><span class="line">    <span class="keyword">elif</span> <span class="string">&#x27;昨天&#x27;</span> <span class="keyword">in</span> e_time:</span><br><span class="line">        change[e_time] = add_time(<span class="number">4</span>)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">del_dictionary</span>(<span class="params">name, value</span>):</span><br><span class="line">    index_num = now_time.index(name)</span><br><span class="line">    now_time[index_num] = value</span><br><span class="line">    <span class="keyword">if</span> name <span class="keyword">in</span> now_time:</span><br><span class="line">        <span class="keyword">return</span> del_dictionary(name, value)</span><br><span class="line"><span class="comment"># 处理数据，赋值正确时间给列表</span></span><br><span class="line"><span class="keyword">for</span> name, value <span class="keyword">in</span> change.items():</span><br><span class="line">    del_dictionary(name, value)</span><br><span class="line"><span class="comment"># 删除自己和dataframe中时间格式不正确的数据行</span></span><br><span class="line"><span class="comment"># 复制数据以防警告</span></span><br><span class="line">new_data = new_data.copy()</span><br><span class="line"><span class="keyword">for</span> e_time <span class="keyword">in</span> now_time:</span><br><span class="line">    <span class="keyword">if</span> re.<span class="keyword">match</span>(<span class="string">r&#x27;^\d*?年\d*?月\d*?日&#x27;</span>, e_time) <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        index_num = now_time.index(e_time)</span><br><span class="line">        new_data.drop(index=new_data.iloc[[index_num], :].index, axis=<span class="number">0</span>,  inplace=<span class="literal">True</span>)</span><br><span class="line">        now_time.remove(e_time)</span><br><span class="line"><span class="comment"># 最后检查</span></span><br><span class="line"><span class="keyword">for</span> e_time <span class="keyword">in</span> now_time:</span><br><span class="line">    <span class="keyword">if</span> re.<span class="keyword">match</span>(<span class="string">r&#x27;^\d*?年\d*?月\d*?日&#x27;</span>, e_time) <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="built_in">print</span>(e_time)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;now_time.index(e_time)&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="comment"># 将列表赋给dataframe</span></span><br><span class="line">new_data[<span class="string">&#x27;push_time_str&#x27;</span>] = now_time</span><br><span class="line">group = new_data.groupby(<span class="string">&#x27;push_time_str&#x27;</span>)[<span class="string">&#x27;push_time_str&#x27;</span>].size().plot(x=new_data[<span class="string">&#x27;push_time_str&#x27;</span>].unique())</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p><img src="image-20230319231212686.png" alt="image-20230319231212686"></p>
+<h1 id="评分量与集数的关系"><a href="#评分量与集数的关系" class="headerlink" title="评分量与集数的关系"></a>评分量与集数的关系</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 评分量与集数的关系</span></span><br><span class="line"><span class="comment"># 折线图 x-集数 y-数量</span></span><br><span class="line">new_data = data.dropna(axis=<span class="number">0</span>, how=<span class="string">&#x27;any&#x27;</span>)</span><br><span class="line">progress = pd.Series(new_data[<span class="string">&#x27;progress&#x27;</span>]).tolist()</span><br><span class="line">vice_list = []</span><br><span class="line"><span class="comment"># 处理含有数字的数据</span></span><br><span class="line"><span class="keyword">for</span> p <span class="keyword">in</span> progress:</span><br><span class="line">    num = re.findall(<span class="string">r&#x27;\d+?&#x27;</span>, p)</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">not</span> num) <span class="keyword">or</span> (<span class="string">&#x27;集&#x27;</span><span class="keyword">not</span> <span class="keyword">in</span> p <span class="keyword">and</span> <span class="string">&#x27;话&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> p):</span><br><span class="line">        vice_list.append(p)</span><br><span class="line">vice_list = <span class="built_in">list</span>(<span class="built_in">set</span>(vice_list))</span><br><span class="line"><span class="comment"># 处理无效数据（只看到预告的）</span></span><br><span class="line">new_data = new_data.copy()</span><br><span class="line"><span class="comment"># 删除dataframe中的无效数据</span></span><br><span class="line">new_data = new_data.drop(index=new_data[new_data[<span class="string">&#x27;progress&#x27;</span>].isin(vice_list)].index, axis=<span class="number">0</span>)</span><br><span class="line">progress = pd.Series(new_data[<span class="string">&#x27;progress&#x27;</span>]).tolist()</span><br><span class="line">progress = [p <span class="keyword">for</span> p <span class="keyword">in</span> progress <span class="keyword">if</span> p <span class="keyword">not</span> <span class="keyword">in</span> vice_list]</span><br><span class="line"><span class="keyword">for</span> p <span class="keyword">in</span> progress:</span><br><span class="line">    num = re.findall(<span class="string">r&#x27;\d+?&#x27;</span>, p)</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;预告&#x27;</span> <span class="keyword">in</span> p:</span><br><span class="line">        progress[progress.index(p)] = <span class="built_in">int</span>(num[<span class="number">0</span>]) - <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        progress[progress.index(p)] = <span class="built_in">int</span>(num[<span class="number">0</span>])</span><br><span class="line">new_data[<span class="string">&#x27;progress&#x27;</span>] = progress</span><br><span class="line">group = new_data.groupby(<span class="string">&#x27;progress&#x27;</span>)[<span class="string">&#x27;progress&#x27;</span>].size().plot(xticks=new_data[<span class="string">&#x27;progress&#x27;</span>].sort_values().unique())</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p><img src="image-20230319231315185.png" alt="image-20230319231315185"></p>
+<h1 id="最后的重要步骤"><a href="#最后的重要步骤" class="headerlink" title="最后的重要步骤"></a>最后的重要步骤</h1><p>加入铃仙：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">く__,.ヘヽ.　　　　/　,ー､ 〉</span></span><br><span class="line"><span class="string">　　　　　＼ &#x27;, !-─‐-i　/　/´</span></span><br><span class="line"><span class="string">　　　 　 ／｀ｰ&#x27;　　　 L/／｀ヽ､</span></span><br><span class="line"><span class="string">　　 　 /　 ／,　 /|　 ,　 ,　　　 &#x27;,</span></span><br><span class="line"><span class="string">　　　ｲ 　/ /-‐/　ｉ　L_ ﾊ ヽ!　 i</span></span><br><span class="line"><span class="string">　　　 ﾚ ﾍ 7ｲ｀ﾄ ﾚ&#x27;ｧ-ﾄ､!ハ|　 |</span></span><br><span class="line"><span class="string">　　　　 !,/7 &#x27;0&#x27;　　 ´0iソ| 　 |</span></span><br><span class="line"><span class="string">　　　　 |.从&quot;　　_　　 ,,,, / |./ 　 |</span></span><br><span class="line"><span class="string">　　　　 ﾚ&#x27;| i＞.､,,__　_,.イ / 　.i 　|</span></span><br><span class="line"><span class="string">　　　　　 ﾚ&#x27;| | / k_７_/ﾚ&#x27;ヽ,　ﾊ.　|</span></span><br><span class="line"><span class="string">　　　　　　 | |/i 〈|/　 i,.ﾍ |　i|</span></span><br><span class="line"><span class="string">　　　　　　.|/ /　ｉ： 　 ﾍ!　　＼|</span></span><br><span class="line"><span class="string">　　　 　 　 kヽ&gt;､ﾊ 　 _,.ﾍ､ 　 /､!</span></span><br><span class="line"><span class="string">　　　　　　 !&#x27;〈//｀Ｔ´&#x27;, ＼ ｀&#x27;7&#x27;ｰr&#x27;</span></span><br><span class="line"><span class="string">　　　　　　 ﾚ&#x27;ヽL__|___i,___,ンﾚ|ノ</span></span><br><span class="line"><span class="string">　　　　　 　　　ﾄ-,/　|___./</span></span><br><span class="line"><span class="string">　　　　　 　　　&#x27;ｰ&#x27;　　!_,.:</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2023/03/19/数据挖掘入门上-b站三体案例/" data-toggle="tooltip" data-placement="top" title="数据挖掘入门练习上-b站三体案例">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2023/03/09/此方Gitblog食用指北/" data-toggle="tooltip" data-placement="top" title="此方Gitblog推送姬食用指北">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#pandas" title="pandas">pandas</a>
+                        
+                          <a class="tag" href="/tags/#numpy" title="numpy">numpy</a>
+                        
+                          <a class="tag" href="/tags/#matplotlib" title="matplotlib">matplotlib</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="#" target="_blank">Cat</a></li>
+                    
+                        <li><a href="https://wchang.fun/" target="_blank">cang</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/ZOUYIQAQ">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    <a href="https://icp.gov.moe/?keyword=20230815" target="_blank"> 萌 ICP 备 20230815 号 </a>
+                    Copyright &copy; Cyber Sorcerer&#39;s Blog 2023 
+                    <a href="https://beian.miit.gov.cn/" target="_blank"><img src="icp.png" alt=""> 鄂 ICP 备 2023003416 号 </a>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    Ported by <a target="_blank" rel="noopener" href="http://blog.kaijun.rocks">Kaijun</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=kaijun&repo=hexo-theme-huxblog&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://cbcat.top/ZOUYIQAQ.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'cbcat.top';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://cbcat.top/ZOUYIQAQ.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
