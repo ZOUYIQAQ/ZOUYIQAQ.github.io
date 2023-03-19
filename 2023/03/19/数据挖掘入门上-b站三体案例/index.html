@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          数据挖掘入门练习上-b站三体案例 - 赛博法师的幻想乡 | Cyber Sorcerer&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://cbcat.top/ZOUYIQAQ.github.io/2023/03/19/数据挖掘入门上-b站三体案例/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/hux-blog.min.css">
+
+
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Cyber Sorcerer&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://cbcat.top/ZOUYIQAQ.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('適当緑_捂头.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#requests" title="requests">requests</a>
+                        
+                    </div>
+                    <h1>数据挖掘入门练习上-b站三体案例</h1>
+                    <h2 class="subheading">数据准备阶段</h2>
+                    <span class="meta">
+                        Posted by Lazy cat on
+                        2023-03-19
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
+<li><a href="#%E9%A6%96%E5%85%88%E9%9C%80%E8%A6%81%E6%98%8E%E7%A1%AE%E7%9B%AE%E6%A0%87">首先需要明确目标</a></li>
+<li><a href="#%E5%88%86%E6%9E%90bilibili%E8%AF%84%E8%AE%BA%E5%8A%A0%E8%BD%BDjs%E5%9C%B0%E5%9D%80">分析bilibili评论加载js地址</a></li>
+<li><a href="#%E7%BC%96%E5%86%99%E7%A8%8B%E5%BA%8F">编写程序</a><ul>
+<li><a href="#%E6%88%98%E5%89%8D%E5%87%86%E5%A4%87">战前准备</a></li>
+<li><a href="#%E4%B8%BB%E5%87%BD%E6%95%B0">主函数</a></li>
+<li><a href="#%E5%AF%BB%E6%89%BE%E7%94%A8%E6%88%B7%E7%AD%89%E7%BA%A7%E5%B9%B6%E4%BF%9D%E5%AD%98%E6%95%B0%E6%8D%AE%E5%88%B0%E6%9C%AC%E5%9C%B0">寻找用户等级并保存数据到本地</a><ul>
+<li><a href="#save_csv%E5%87%BD%E6%95%B0">save_csv函数</a></li>
+<li><a href="#save_level_data%E5%87%BD%E6%95%B0">save_level_data函数</a></li>
+<li><a href="#get_level%E5%87%BD%E6%95%B0">get_level函数</a></li>
+<li><a href="#displace_content%E5%87%BD%E6%95%B0">displace_content函数</a></li>
+</ul>
+</li>
+<li><a href="#ip%E6%B1%A0%E7%9B%B8%E5%85%B3">ip池相关</a><ul>
+<li><a href="#get_ip_pool%E5%87%BD%E6%95%B0">get_ip_pool函数</a></li>
+<li><a href="#judgment_up_ip%E5%87%BD%E6%95%B0">judgment_up_ip函数</a></li>
+<li><a href="#response_ip%E5%87%BD%E6%95%B0">response_ip函数</a></li>
+<li><a href="#sort_ip_pool%E5%87%BD%E6%95%B0">sort_ip_pool函数</a></li>
+</ul>
+</li>
+<li><a href="#%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86">本地文件处理</a></li>
+<li><a href="#%E5%BC%80%E5%A7%8B%E7%A8%8B%E5%BA%8F">开始程序</a></li>
+<li><a href="#%E5%8A%A0%E4%B8%8A%E9%93%83%E4%BB%99">最重要的步骤！</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="首先需要明确目标"><a href="#首先需要明确目标" class="headerlink" title="首先需要明确目标"></a>首先需要明确目标</h1><p>这次是对bilibili的三体评分进行分析，需要完成以下的数据图例展示</p>
+<ul>
+<li>每个评分段与评分人等级间的关系<ul>
+<li>饼图-详细展示每个评分段情况</li>
+</ul>
+</li>
+<li>评分随集数的变化 <ul>
+<li>折线图 x-集数 y-评分</li>
+</ul>
+</li>
+<li>评分随时间的变化<ul>
+<li>折线图 x-时间 y-评分</li>
+</ul>
+</li>
+<li>评分的总体情况<ul>
+<li>饼图</li>
+</ul>
+</li>
+<li>每集的评分占比<ul>
+<li>饼图</li>
+</ul>
+</li>
+<li>每集的评分人等级占比<ul>
+<li>饼图</li>
+</ul>
+</li>
+<li>评分人等级的总体分布<ul>
+<li>饼图</li>
+</ul>
+</li>
+<li>评分数量与时间的关系<ul>
+<li>折线图 x-时间 y-数量</li>
+</ul>
+</li>
+<li>评分量与集数的关系<ul>
+<li>折线图 x-集数 y-数量</li>
+</ul>
+</li>
+</ul>
+<h1 id="分析bilibili评论加载js地址"><a href="#分析bilibili评论加载js地址" class="headerlink" title="分析bilibili评论加载js地址"></a>分析bilibili评论加载js地址</h1><p>首先进入bilibili三体番剧详情页：</p>
+<p><img src="image-20230319155622390.png" alt="image-20230319155622390"></p>
+<p>然后观察，发现整个页面是动态加载，而非是静态加载，在滑到最底后发现进度条突然出现跳跃，但浏览器的url地址无任何改变：</p>
+<p><img src="image-20230319160044460.png" alt="image-20230319160044460"></p>
+<p>可知bilibili评分是动态加载。</p>
+<p>然后开始寻找真正的地址，首先，按F12打开控制台，找到网络：</p>
+<p><img src="image-20230319160232969.png" alt="image-20230319160232969"></p>
+<p>在清除完冗余消息后再次滑动直到浏览器右侧进度条跳动：</p>
+<p><img src="image-20230319160600378.png" alt="image-20230319160600378"></p>
+<p>仔细观察大小，发现可疑的消息有两个，但第二个的类型为webp（图片），肯定不是我们想要的，所以开始分析第一个：</p>
+<p><img src="image-20230319160739214.png" alt="image-20230319160739214"></p>
+<p><img src="image-20230319160814485.png" alt="image-20230319160814485"></p>
+<p>结合响应，可以看出这就是我们想要的，然后开始观察这个js链接的参数（负载）：</p>
+<p><img src="image-20230319161025008.png" alt="image-20230319161025008"></p>
+<p>有很多参数，结合部分英文，猜测它们的含义：</p>
+<ul>
+<li>media_id：这个参数与浏览器的url地址中的md后数字一致，猜测可能是番剧的唯一标识</li>
+<li>ps：看不出什么</li>
+<li>sort：可能是排序方式</li>
+<li>cursor：直译为“光标”，猜测可能是请求的开始位置或某个评论的唯一Id</li>
+</ul>
+<p>然后继续分析，滑动更多次，分析共同点：</p>
+<p><img src="image-20230319162034593.png" alt="image-20230319162034593"></p>
+<p>可以看到，随着页面不断下滑，负载中变化的只有cursor值，至此，可以知cursor是获取评论的重要变量，如果能获取cursor，就能得到评论链接。</p>
+<p>但它似乎毫无规律，忽大忽小，看不出什么，但不要紧，先发个请求试试，看看会得到些什么：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url = <span class="string">f&#x27;https://api.bilibili.com/pgc/review/short/list?&#x27;</span></span><br><span class="line">data = &#123;<span class="string">&#x27;media_id&#x27;</span>: <span class="number">4315402</span>,</span><br><span class="line">        <span class="string">&#x27;ps&#x27;</span>: <span class="string">&#x27;20&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;sort&#x27;</span>: <span class="string">&#x27;0&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;cursor&#x27;</span>: <span class="number">83489914405152</span>&#125;</span><br><span class="line">heads = &#123;</span><br><span class="line">        <span class="string">&#x27;user-agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36 Edg/110.0.1587.69&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment"># 请求数据</span></span><br><span class="line">score_data = requests.get(url=url, headers=heads, params=data)</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;ex.json&#x27;</span>, <span class="string">&#x27;w&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(score_data.content.decode())</span><br></pre></td></tr></table></figure>
+
+<p>是个json文件，这点从浏览器的响应部分可以看出，所以这里保存为json文件。</p>
+<p>格式化后滑到最底，发现next存在：</p>
+<p><img src="image-20230319163111466.png" alt="image-20230319163111466"></p>
+<p>猜测这可能就是我们需要的参数，将next作为参数填入，发出请求后响应成功：</p>
+<p><img src="image-20230319163316464.png" alt="image-20230319163316464"></p>
+<p>可以看到，文件被改变了，然后格式化代码，检查响应结果是否是需要的：</p>
+<p><img src="image-20230319163450209.png" alt="image-20230319163450209"></p>
+<p>看到progress，score等参数，能够明白这就是我们需要的数据。</p>
+<p>至此，一切基本数据准备完毕，开始批量请求数据并保存到本地。</p>
+<h1 id="编写程序"><a href="#编写程序" class="headerlink" title="编写程序"></a>编写程序</h1><h2 id="战前准备"><a href="#战前准备" class="headerlink" title="战前准备"></a>战前准备</h2><p>导入好多好多库：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> random</span><br></pre></td></tr></table></figure>
+
+<p>然后准备一些空数据池子和好多好多线程锁：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">score = &#123;</span><br><span class="line">    <span class="string">&#x27;score_num&#x27;</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="string">&#x27;people_num&#x27;</span>: <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line">start_time = time.time()</span><br><span class="line">ip_pool = []</span><br><span class="line">run_web = []</span><br><span class="line">up_ip = <span class="number">0</span></span><br><span class="line">up_ip_wait = threading.Event()</span><br><span class="line">ip_lock = threading.Lock()</span><br><span class="line">time_lock = threading.Lock()</span><br><span class="line">save_lock = threading.Lock()</span><br><span class="line">score_lock = threading.Lock()</span><br><span class="line">judgment_lock = threading.Lock()</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="主函数"><a href="#主函数" class="headerlink" title="主函数"></a>主函数</h2><p>这是一个url地址：</p>
+<p><a target="_blank" rel="noopener" href="https://api.bilibili.com/pgc/review/short/list?media_id=4315402&amp;ps=20&amp;sort=0&amp;cursor=83472734532707">https://api.bilibili.com/pgc/review/short/list?media_id=4315402&amp;ps=20&amp;sort=0&amp;cursor=83472734532707</a></p>
+<p>仔细分析链接和响应内容可以看到更多的内容</p>
+<ul>
+<li>media_id：番剧唯一id</li>
+<li>ps：每次请求评论数量</li>
+<li>sort：评论排序方式，0代表热度，1代表时间</li>
+<li>short：代表长评或短评</li>
+</ul>
+<p>同时能注意到，这个响应的模式是接受到数据，然后产生新的数据影响下一次请求，这是一个典型的递归。</p>
+<p>并且研究链接返回的json数据后发现没有用户等级，所以需要另外请求。</p>
+<p>所以这样写：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">requests_first</span>(<span class="params">name_id, mode, cursor=<span class="literal">None</span></span>):</span><br><span class="line">    up_ip_wait.wait()</span><br><span class="line">    url = <span class="string">f&#x27;https://api.bilibili.com/pgc/review/<span class="subst">&#123;mode&#125;</span>/list?&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> cursor <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        data = &#123;<span class="string">&#x27;media_id&#x27;</span>: name_id,</span><br><span class="line">                <span class="string">&#x27;ps&#x27;</span>: <span class="string">&#x27;20&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;sort&#x27;</span>: <span class="string">&#x27;0&#x27;</span>&#125;</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        data = &#123;<span class="string">&#x27;media_id&#x27;</span>: name_id,</span><br><span class="line">                <span class="string">&#x27;ps&#x27;</span>: <span class="string">&#x27;20&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;sort&#x27;</span>: <span class="string">&#x27;0&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;cursor&#x27;</span>: cursor&#125;</span><br><span class="line">    heads = &#123;</span><br><span class="line">        <span class="string">&#x27;user-agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36 Edg/110.0.1587.69&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">    ip = get_ip_pool()</span><br><span class="line">    <span class="keyword">if</span> ip <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        requests_first(name_id, mode, cursor)</span><br><span class="line">    posix = &#123;<span class="string">&#x27;https&#x27;</span>: <span class="string">f&#x27;http://<span class="subst">&#123;ip&#125;</span>&#x27;</span>&#125;</span><br><span class="line">    <span class="comment"># 请求数据</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        score_data = requests.get(url=url, headers=heads, params=data, proxies=posix, timeout=<span class="number">10</span>)</span><br><span class="line">        <span class="comment"># 添加score数据</span></span><br><span class="line">        add_data(json.loads(score_data.text))</span><br><span class="line">        save_csv(score_data)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;第<span class="subst">&#123;score[<span class="string">&quot;people_num&quot;</span>]&#125;</span>个评分爬取开始&#x27;</span>)</span><br><span class="line">        <span class="comment"># 读取下一个请求的参数,next</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">int</span>(json.loads(score_data.text)[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;next&#x27;</span>]) == <span class="number">0</span>:</span><br><span class="line">            cursor_num = json.loads(score_data.text)[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;next&#x27;</span>]</span><br><span class="line">            requests_first(name_id, mode, cursor_num)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">if</span> mode == <span class="string">&#x27;short&#x27;</span>:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;全部短评爬取完毕&#x27;</span>)</span><br><span class="line">            <span class="keyword">elif</span> mode == <span class="string">&#x27;long&#x27;</span>:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;全部长评爬取完毕&#x27;</span>)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;打开\n<span class="subst">&#123;url&#125;</span>\n失败&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;ip&#125;</span>已删除&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> ip <span class="keyword">in</span> ip_pool <span class="keyword">and</span> ip <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            ip_lock.acquire()</span><br><span class="line">            ip_pool.remove(ip)</span><br><span class="line">            ip_lock.release()</span><br><span class="line">        requests_first(name_id, mode, cursor)</span><br></pre></td></tr></table></figure>
+
+<p>简单解释这个函数：</p>
+<ol>
+<li><p>首先，它会接受一些参数，分别是：</p>
+<ul>
+<li>name_id：番剧id</li>
+<li>mode：请求的评论是长评还是短评</li>
+<li>cursor：之前分析过的下个请求链接的参数，在评论的第一页可以不要这个参数</li>
+</ul>
+</li>
+<li><p>然后，调用get_ip_pool()函数获得一个ip，并将这些参数用来构建完整的请求。</p>
+</li>
+<li><p>之后，它会分析响应的数据，如果next不是0，就代表评论还没爬取完毕。然后将调用add_data函数（统计数据）和save_csv函数，（这个函数的功能是访问每个评论人的mid并寻找其等级，然后将全部数据保存到本地）接着，传入请求到的评论参数。</p>
+</li>
+<li><p>调用自己，开始下一次请求。</p>
+</li>
+</ol>
+<p>在其中，如果打开网页失败，则删除此ip并使用相同的参数调用自己，保证请求不会中断。</p>
+<h2 id="寻找用户等级并保存数据到本地"><a href="#寻找用户等级并保存数据到本地" class="headerlink" title="寻找用户等级并保存数据到本地"></a>寻找用户等级并保存数据到本地</h2><h3 id="save-csv函数："><a href="#save-csv函数：" class="headerlink" title="save_csv函数："></a>save_csv函数：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 写入csv文件</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">save_csv</span>(<span class="params">data, encoding=<span class="string">&#x27;utf8&#x27;</span></span>):</span><br><span class="line">    save_score_data = json.loads(data.content.decode(encoding))[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;list&#x27;</span>]</span><br><span class="line">    <span class="comment"># 写入文件</span></span><br><span class="line">    <span class="keyword">for</span> save_data <span class="keyword">in</span> save_score_data:</span><br><span class="line">        save_work = threading.Thread(target=save_level_data, args=(save_data, encoding))</span><br><span class="line">        save_work.start()</span><br><span class="line">        <span class="keyword">global</span> run_web</span><br><span class="line">        run_web.append(save_work)</span><br></pre></td></tr></table></figure>
+
+<p>简单解释：</p>
+<ol>
+<li>首先，它接受data（数据）和encoding（编码方式）</li>
+<li>然后它将对data数据进行基本的处理，然后开启新的线程，在新的线程中调用save_level_data函数，并将处理过的数据和编码方式传给该函数。同时将此线程保存进run_web列表里，便于之后结束全部线程。</li>
+</ol>
+<h3 id="save-level-data函数："><a href="#save-level-data函数：" class="headerlink" title="save_level_data函数："></a>save_level_data函数：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 写入数据</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">save_level_data</span>(<span class="params">save_data, encoding</span>):</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;3body_score_data.csv&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, encoding=encoding) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;progress&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> save_data:</span><br><span class="line">            save_data[<span class="string">&quot;progress&quot;</span>] = <span class="string">&#x27;null&#x27;</span></span><br><span class="line">        level = get_level(save_data[<span class="string">&quot;author&quot;</span>][<span class="string">&quot;mid&quot;</span>])</span><br><span class="line">        new_content = displace_content(save_data[<span class="string">&quot;content&quot;</span>])</span><br><span class="line">        save_lock.acquire()</span><br><span class="line">        f.write(<span class="string">f&#x27;\&quot;<span class="subst">&#123;save_data[<span class="string">&quot;author&quot;</span>][<span class="string">&quot;uname&quot;</span>]&#125;</span>\&quot;,<span class="subst">&#123;save_data[<span class="string">&quot;author&quot;</span>][<span class="string">&quot;mid&quot;</span>]&#125;</span>,\&quot;<span class="subst">&#123;new_content&#125;</span>\&quot;,\&quot;<span class="subst">&#123;save_data[<span class="string">&quot;progress&quot;</span>]&#125;</span>\&quot;,\&quot;<span class="subst">&#123;save_data[<span class="string">&quot;push_time_str&quot;</span>]&#125;</span>\&quot;,<span class="subst">&#123;save_data[<span class="string">&quot;score&quot;</span>]&#125;</span>,<span class="subst">&#123;level&#125;</span>\n&#x27;</span>)</span><br><span class="line">        save_lock.release()</span><br></pre></td></tr></table></figure>
+
+<p>简单解释：</p>
+<ol>
+<li>首先它接受save_data（数据）和encoding（编码方式）</li>
+<li>然后它将打开3body_score_data.csv文件，并调用get_level函数得到用户等级。</li>
+<li>在然后调用displace_content对评论进行处理，防止破坏存储数据结构（比如&quot;）。</li>
+<li>最后将各种数据以“a”（追加模式）填入3body_score_data.csv文件。</li>
+</ol>
+<h3 id="get-level函数"><a href="#get-level函数" class="headerlink" title="get_level函数"></a>get_level函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取用户等级</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_level</span>(<span class="params">mid</span>):</span><br><span class="line">    up_ip_wait.wait()</span><br><span class="line">    url = <span class="string">f&#x27;https://m.bilibili.com/space/<span class="subst">&#123;mid&#125;</span>&#x27;</span></span><br><span class="line">    heads = &#123;</span><br><span class="line">        <span class="string">&#x27;user-agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Mobile Safari/537.36 Edg/110.0.1587.69&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">    ip = get_ip_pool()</span><br><span class="line">    <span class="keyword">if</span> ip <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        get_level(mid)</span><br><span class="line">    posix = &#123;<span class="string">&#x27;https&#x27;</span>: <span class="string">f&#x27;http://<span class="subst">&#123;ip&#125;</span>&#x27;</span>&#125;</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        data = requests.get(url=url, headers=heads, proxies=posix, timeout=<span class="number">10</span>)</span><br><span class="line">        web_content = data.content.decode(<span class="string">&#x27;utf8&#x27;</span>)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            level = re.findall(<span class="string">r&#x27;class=\&quot;iconfont ic_userlevel_(\d)\&quot;&#x27;</span>, web_content)[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">except</span> IndexError:</span><br><span class="line">            level = <span class="number">0</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;mid为；<span class="subst">&#123;mid&#125;</span> 的用户信息获取完毕&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> level</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;获取mid为：<span class="subst">&#123;mid&#125;</span> 的用户信息失败&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;ip&#125;</span> 已删除&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> ip <span class="keyword">in</span> ip_pool <span class="keyword">and</span> ip <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            ip_lock.acquire()</span><br><span class="line">            ip_pool.remove(ip)</span><br><span class="line">            ip_lock.release()</span><br><span class="line">        get_level(mid)</span><br></pre></td></tr></table></figure>
+
+<p>简答解释：</p>
+<p>基本原理和主函数相同，接受一个用户id，请求一个ip，返回一个用户等级。</p>
+<p>具体的寻找用户等级的过程略过。</p>
+<h3 id="displace-content函数"><a href="#displace-content函数" class="headerlink" title="displace_content函数"></a>displace_content函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">displace_content</span>(<span class="params">content</span>):</span><br><span class="line">    new_content = content.replace(<span class="string">&#x27;，&#x27;</span>, <span class="string">&#x27; &#x27;</span>)</span><br><span class="line">    new_content = new_content.replace(<span class="string">&#x27;\&#x27;&#x27;</span>, <span class="string">&#x27; &#x27;</span>)</span><br><span class="line">    new_content = new_content.replace(<span class="string">&#x27;\&quot;&#x27;</span>, <span class="string">&#x27; &#x27;</span>)</span><br><span class="line">    new_content = new_content.replace(<span class="string">&#x27;?&#x27;</span>, <span class="string">&#x27; &#x27;</span>)</span><br><span class="line">    new_content = new_content.replace(<span class="string">&#x27;？&#x27;</span>, <span class="string">&#x27; &#x27;</span>)</span><br><span class="line">    new_content = new_content.replace(<span class="string">&#x27;。&#x27;</span>, <span class="string">&#x27; &#x27;</span>)</span><br><span class="line">    new_content = new_content.replace(<span class="string">&#x27;!&#x27;</span>, <span class="string">&#x27; &#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> new_content</span><br></pre></td></tr></table></figure>
+
+<p>不用多介绍，全是替换。接受一个文本，然后返回处理好的文本。</p>
+<h2 id="ip池相关"><a href="#ip池相关" class="headerlink" title="ip池相关"></a>ip池相关</h2><h3 id="get-ip-pool函数"><a href="#get-ip-pool函数" class="headerlink" title="get_ip_pool函数"></a>get_ip_pool函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_ip_pool</span>():</span><br><span class="line">    up_ip_wait.wait()</span><br><span class="line">    now_time = time.time()</span><br><span class="line">    time_lock.acquire()</span><br><span class="line">    <span class="keyword">global</span> ip_pool</span><br><span class="line">    <span class="keyword">global</span> start_time</span><br><span class="line">    <span class="keyword">global</span> up_ip</span><br><span class="line">    <span class="keyword">if</span> now_time-start_time &gt; <span class="number">290</span> <span class="keyword">or</span> ip_pool == []:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;超时，开始重新获取ip&#x27;</span>)</span><br><span class="line">        time_lock.release()</span><br><span class="line">        up_ip += <span class="number">1</span></span><br><span class="line">        judgment_up_ip()</span><br><span class="line">        start_time = time.time()</span><br><span class="line">    <span class="keyword">if</span> time_lock.locked():</span><br><span class="line">        time_lock.release()</span><br><span class="line">    <span class="keyword">return</span> sort_ip_pool()</span><br></pre></td></tr></table></figure>
+
+<p>简单介绍：</p>
+<ol>
+<li>查看up_ip_wait的状态，如果为“未设置”，这将阻滞程序。</li>
+<li>然后开始计时now_time = time.time()并申请一把“时间锁（线程锁）”</li>
+<li>使用一大堆公共变量，然后开始判断，如果距离上一次申请ip的时间达到了290秒或者ip池空了就调用judgment_up_ip()函数（重新填充ip池）。</li>
+<li>释放锁，并返回sort_ip_pool()函数（这个函数会返回一个Ip）</li>
+</ol>
+<h3 id="judgment-up-ip函数"><a href="#judgment-up-ip函数" class="headerlink" title="judgment_up_ip函数"></a>judgment_up_ip函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 判断是否请求函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">judgment_up_ip</span>():</span><br><span class="line">    judgment_lock.acquire()</span><br><span class="line">    time.sleep(random.randint(<span class="number">1</span>, <span class="number">3</span>))</span><br><span class="line">    <span class="keyword">global</span> up_ip</span><br><span class="line">    <span class="keyword">if</span> up_ip &gt;= <span class="number">1</span>:</span><br><span class="line">        up_ip_wait.clear()</span><br><span class="line">        response_ip()</span><br><span class="line">        up_ip = <span class="number">0</span></span><br><span class="line">    judgment_lock.release()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;判断结束&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这是专门用来判断是否应该更新ip池的函数。如果没有这个函数，在遇到了多个线程同时请求更新ip池，就会几乎无限地更新ip池，所以专门用函数来判断是否应该更新ip池。</p>
+<p>简单介绍：</p>
+<ol>
+<li>首先，申请判断锁，然后随机休眠几秒叉开程序间的时间，防止同时进入该函数，和不停申请更新ip池。</li>
+<li>然后使用公共变量up_ip，这是一个指标，每次当有线程或其他想要更新ip池时该值就会加一。如果指标大于1，则释放锁并将up_ip_wait的状态设置为“未设置”，然后调用response_ip()函数，更新ip池。同时将up_ip值设为0。</li>
+<li>最后释放判断锁并给出提示信息。</li>
+</ol>
+<h3 id="response-ip函数"><a href="#response-ip函数" class="headerlink" title="response_ip函数"></a>response_ip函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 请求ip</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">response_ip</span>():</span><br><span class="line">    ip_lock.acquire()</span><br><span class="line">    time.sleep(random.randint(<span class="number">1</span>, <span class="number">3</span>))</span><br><span class="line">    url = <span class="string">&#x27;http://xxxxxx&#x27;</span> <span class="comment"># 请求ip的api</span></span><br><span class="line">    <span class="keyword">global</span> ip_pool</span><br><span class="line">    ip_pool = []</span><br><span class="line">    ip_data = requests.get(url=url)</span><br><span class="line">    <span class="comment"># 测试ip可用性</span></span><br><span class="line">    <span class="keyword">for</span> ip <span class="keyword">in</span> ip_data.text.splitlines():</span><br><span class="line">        posix = &#123;<span class="string">&#x27;https&#x27;</span>: <span class="string">f&#x27;http://<span class="subst">&#123;ip&#125;</span>&#x27;</span>&#125;</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            requests.get(<span class="string">&#x27;https://www.bilibili.com/&#x27;</span>, proxies=posix, timeout=<span class="number">0.5</span>)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;ip&#125;</span>可用&#x27;</span>)</span><br><span class="line">            ip_pool.append(ip)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;ip&#125;</span>不可用&#x27;</span>)</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">    ip_lock.release()</span><br><span class="line">    up_ip_wait.<span class="built_in">set</span>()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;一轮ip更新已完成&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>简单解释：</p>
+<ol>
+<li><p>首先申请ip锁</p>
+</li>
+<li><p>在得到请求的ip后开始判断，如果这个Ip能在0.5秒内返回结果，就认为这个ip是可用的并加入ip_pool，否则就跳过。</p>
+</li>
+<li><p>最后释放ip锁，并将up_ip_wait变量的状态改为“设置”</p>
+</li>
+</ol>
+<h3 id="sort-ip-pool函数"><a href="#sort-ip-pool函数" class="headerlink" title="sort_ip_pool函数"></a>sort_ip_pool函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 动态处理ip池,返回第一个值，同时将该值置于末尾</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">sort_ip_pool</span>():</span><br><span class="line">    up_ip_wait.wait()</span><br><span class="line">    ip_lock.acquire()</span><br><span class="line">    <span class="keyword">global</span> ip_pool</span><br><span class="line">    <span class="keyword">global</span> up_ip</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> ip_pool == []:</span><br><span class="line">        ex = ip_pool.pop(<span class="number">0</span>)</span><br><span class="line">        ip_pool.append(ex)</span><br><span class="line">        ip_lock.release()</span><br><span class="line">        <span class="keyword">return</span> ex</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;无可用ip，正在重新请求&#x27;</span>)</span><br><span class="line">        ip_lock.release()</span><br><span class="line">        up_ip += <span class="number">1</span></span><br><span class="line">        judgment_up_ip()</span><br><span class="line">        sort_ip_pool()</span><br></pre></td></tr></table></figure>
+
+<p>动态处理ip池,返回第一个值，同时将该值置于末尾，这样一来就不会导致总是使用同一个ip了。</p>
+<p>简单介绍：</p>
+<ol>
+<li>判断up_ip_wait是否该等待，然后申请ip锁</li>
+<li>使用公共变量并判读ip池是否是空，如果是，就释放ip锁然后重新调用自己。如果不是，那就返回开头的Ip并将其置于尾部。</li>
+</ol>
+<h2 id="本地文件处理"><a href="#本地文件处理" class="headerlink" title="本地文件处理"></a>本地文件处理</h2><h3 id="up-local-scv函数"><a href="#up-local-scv函数" class="headerlink" title="up_local_scv函数"></a>up_local_scv函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">up_local_scv</span>(<span class="params">name</span>):</span><br><span class="line">    num = <span class="number">0</span></span><br><span class="line">    err_num = <span class="number">0</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(name, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        line_list = f.readlines()</span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> line_list:</span><br><span class="line">            num += <span class="number">1</span></span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                line.decode()</span><br><span class="line">            <span class="keyword">except</span> UnicodeDecodeError:</span><br><span class="line">                err_num += <span class="number">1</span></span><br><span class="line">                <span class="built_in">print</span>(<span class="built_in">str</span>(num))</span><br><span class="line">                line_list.pop(num - <span class="number">1</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;删除含有非utf8字符段结束&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;共计<span class="subst">&#123;err_num&#125;</span>个&#x27;</span>)</span><br><span class="line">    new_line_list = []</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> line_list:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            text = line.decode()</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> text.isspace():</span><br><span class="line">                text = text.strip()</span><br><span class="line">                text = text.lstrip()</span><br><span class="line">                text = text.rstrip()</span><br><span class="line">                new_line_list.append(text)</span><br><span class="line">        <span class="keyword">except</span> UnicodeDecodeError:</span><br><span class="line">            <span class="built_in">print</span>(<span class="built_in">str</span>(num))</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(name, <span class="string">&#x27;w&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(<span class="string">&#x27;\n&#x27;</span>.join(new_line_list))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;更新csv文件完成&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这是用来处理哪些编码不对的数据的函数。</p>
+<p>不知道为什么，某些字符的编码并不是utf-8，虽然不多，但却会导致整个文件坏死无法读出，所以特地准备函数来处理。</p>
+<p>并不难，如果能看懂其他函数，那这个是肯定没有问题的，这是十分基础的部分。</p>
+<h2 id="开始程序"><a href="#开始程序" class="headerlink" title="开始程序"></a>开始程序</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="comment"># 填充基础ip池</span></span><br><span class="line">    response_ip()</span><br><span class="line">    <span class="comment"># 短评爬取</span></span><br><span class="line">    short_score = threading.Thread(target=requests_first, args=(<span class="number">4315402</span>, <span class="string">&#x27;short&#x27;</span>))</span><br><span class="line">    short_score.start()</span><br><span class="line">    run_web.append(short_score)</span><br><span class="line">    <span class="comment"># 长评爬取</span></span><br><span class="line">    long_score = threading.Thread(target=requests_first, args=(<span class="number">4315402</span>, <span class="string">&#x27;long&#x27;</span>))</span><br><span class="line">    long_score.start()</span><br><span class="line">    run_web.append(long_score)</span><br><span class="line">    <span class="comment"># 结束掉所有子线程</span></span><br><span class="line">    <span class="keyword">for</span> work <span class="keyword">in</span> run_web:</span><br><span class="line">        work.join()</span><br><span class="line">    <span class="comment"># 计算平均分</span></span><br><span class="line">    average_score = score[<span class="string">&#x27;score_num&#x27;</span>] / score[<span class="string">&#x27;people_num&#x27;</span>]</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;平均分为<span class="subst">&#123;average_score&#125;</span>&#x27;</span>)</span><br><span class="line">    up_local_scv(<span class="string">&#x27;3body_score_data.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>同时开始长短评爬取，然后等待子线程结束并计算平均分。</p>
+<p>基础功能完成，但还有特别重要的一点，绝对不能忘：</p>
+<h2 id="加上铃仙"><a href="#加上铃仙" class="headerlink" title="加上铃仙"></a>加上铃仙</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">く__,.ヘヽ.　　　　/　,ー､ 〉</span></span><br><span class="line"><span class="string">　　　　　＼ &#x27;, !-─‐-i　/　/´</span></span><br><span class="line"><span class="string">　　　 　 ／｀ｰ&#x27;　　　 L/／｀ヽ､</span></span><br><span class="line"><span class="string">　　 　 /　 ／,　 /|　 ,　 ,　　　 &#x27;,</span></span><br><span class="line"><span class="string">　　　ｲ 　/ /-‐/　ｉ　L_ ﾊ ヽ!　 i</span></span><br><span class="line"><span class="string">　　　 ﾚ ﾍ 7ｲ｀ﾄ ﾚ&#x27;ｧ-ﾄ､!ハ|　 |</span></span><br><span class="line"><span class="string">　　　　 !,/7 &#x27;0&#x27;　　 ´0iソ| 　 |</span></span><br><span class="line"><span class="string">　　　　 |.从&quot;　　_　　 ,,,, / |./ 　 |</span></span><br><span class="line"><span class="string">　　　　 ﾚ&#x27;| i＞.､,,__　_,.イ / 　.i 　|</span></span><br><span class="line"><span class="string">　　　　　 ﾚ&#x27;| | / k_７_/ﾚ&#x27;ヽ,　ﾊ.　|</span></span><br><span class="line"><span class="string">　　　　　　 | |/i 〈|/　 i,.ﾍ |　i|</span></span><br><span class="line"><span class="string">　　　　　　.|/ /　ｉ： 　 ﾍ!　　＼|</span></span><br><span class="line"><span class="string">　　　 　 　 kヽ&gt;､ﾊ 　 _,.ﾍ､ 　 /､!</span></span><br><span class="line"><span class="string">　　　　　　 !&#x27;〈//｀Ｔ´&#x27;, ＼ ｀&#x27;7&#x27;ｰr&#x27;</span></span><br><span class="line"><span class="string">　　　　　　 ﾚ&#x27;ヽL__|___i,___,ンﾚ|ノ</span></span><br><span class="line"><span class="string">　　　　　 　　　ﾄ-,/　|___./</span></span><br><span class="line"><span class="string">　　　　　 　　　&#x27;ｰ&#x27;　　!_,.:</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>等待程序后可以得到我们需要的数据：</p>
+<p><img src="image-20230319195955962.png" alt="image-20230319195955962"></p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2023/03/09/此方Gitblog食用指北/" data-toggle="tooltip" data-placement="top" title="此方Gitblog推送姬食用指北">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#requests" title="requests">requests</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="#" target="_blank">Cat</a></li>
+                    
+                        <li><a href="https://wchang.fun/" target="_blank">cang</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/ZOUYIQAQ">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    <a href="https://icp.gov.moe/?keyword=20230815" target="_blank"> 萌 ICP 备 20230815 号 </a>
+                    Copyright &copy; Cyber Sorcerer&#39;s Blog 2023 
+                    <a href="https://beian.miit.gov.cn/" target="_blank"><img src="icp.png" alt=""> 鄂 ICP 备 2023003416 号 </a>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    Ported by <a target="_blank" rel="noopener" href="http://blog.kaijun.rocks">Kaijun</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=kaijun&repo=hexo-theme-huxblog&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://cbcat.top/ZOUYIQAQ.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'cbcat.top';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://cbcat.top/ZOUYIQAQ.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
