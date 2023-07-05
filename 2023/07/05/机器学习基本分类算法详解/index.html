@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          机器学习基本分类算法详解 - 赛博法师的幻想乡 | Cyber Sorcerer&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://cbcat.top/ZOUYIQAQ.github.io/2023/07/05/机器学习基本分类算法详解/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/hux-blog.min.css">
+
+
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Cyber Sorcerer&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://cbcat.top/ZOUYIQAQ.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('しらせえす_an sleeping AI girl_109634253_p0.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#笔记" title="笔记">笔记</a>
+                        
+                          <a class="tag" href="/tags/#机器学习" title="机器学习">机器学习</a>
+                        
+                    </div>
+                    <h1>机器学习基本分类算法详解</h1>
+                    <h2 class="subheading">KNN算法、决策树、朴素贝叶斯、随机森林、逻辑回归</h2>
+                    <span class="meta">
+                        Posted by Lazy cat on
+                        2023-07-05
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="KNN算法"><a href="#KNN算法" class="headerlink" title="KNN算法"></a>KNN算法</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h3 id="说人话"><a href="#说人话" class="headerlink" title="说人话"></a>说人话</h3><p>如下图，圆圈代表我需要预测的位置（在某某小区），但不知道圆圈具体在哪。除此外，还知道其他几人（其他样本）所在位置。于是我就找离我很近的那个人，他所在的位置就很有可能是我所在的位置。</p>
+<p>比如在这个图中，圆圈离那个蓝色衣服的人最近，假设我们只根据一个人来判断，那么我们就认为圆圈和蓝衣服在一个小区。</p>
+<p>相同的，我们也可以根据多个人的位置来判断自身位置，比如两个人。假设蓝衣服和蘑菇头在一个小区里，那么圆圈离他们两最近，圆圈便和他们在一个小区。</p>
+<p>很明显，如果这样分类我们很有可能会遇见一个问题，假设蘑菇头和蓝衣服不在同一个小区该怎么办？</p>
+<p>此时应该使用权值进行计算，假设和蓝衣服的距离是1.12，而和蘑菇头的距离为1.5。那么他们的权重分别为1/1.12=0.89和1/1.5=0.67。于是我们能够得出，蓝衣服的权重更大，因此我们认定圆圈和蓝衣服在同个小区。</p>
+<p>假设我们根据3个人来判断，而最近的三个人又分在两个小区里，那么我们就将所有人的权重根据小区来相加，最后得出对应小区的权重。然后根据小区的权重来进行选择。这也是不直接使用距离来进行计算的原因。</p>
+<p>而在上述过程中，小区就代表了分类，选择几个人就代表了k值，根据什么来进行距离的计算也是一个可选的项。</p>
+<p>对于距离的计算，有许多种计算的方式，比如：闵可夫斯基距离、欧氏距离、曼哈顿距离、切比雪夫距离、余弦距离</p>
+<p><img src="image-20230705113806507.png" alt="image-20230705113806507"></p>
+<h3 id="具体计算"><a href="#具体计算" class="headerlink" title="具体计算"></a>具体计算</h3><h4 id="欧氏距离"><a href="#欧氏距离" class="headerlink" title="欧氏距离"></a>欧氏距离</h4><p>对于两个n维向量x和y，它们之间的欧氏距离为</p>
+<p><img src="image-20230705121936629.png" alt="image-20230705121936629"></p>
+<h4 id="哈顿距离"><a href="#哈顿距离" class="headerlink" title="哈顿距离"></a>哈顿距离</h4><p>对于两个n维向量x和y，它们之间的曼哈顿距离为</p>
+<p><img src="image-20230705122012910.png" alt="image-20230705122012910"></p>
+<h4 id="切比雪夫距离"><a href="#切比雪夫距离" class="headerlink" title="切比雪夫距离"></a>切比雪夫距离</h4><p>对于两个n维向量x和y，它们之间的切比雪夫距离为</p>
+<p><img src="image-20230705122059559.png" alt="image-20230705122059559"></p>
+<h4 id="闵可夫斯基距离"><a href="#闵可夫斯基距离" class="headerlink" title="闵可夫斯基距离"></a>闵可夫斯基距离</h4><p>对于两个n维向量x和y，它们之间的闵可夫斯基距离为</p>
+<p><img src="image-20230705122245745.png" alt="image-20230705122245745"></p>
+<p>其中p为一个可变参数。当p=1时，闵可夫斯基距离即为曼哈顿距离；当p=2时，闵可夫斯基距离即为欧氏距离。</p>
+<h4 id="余弦距离"><a href="#余弦距离" class="headerlink" title="余弦距离"></a>余弦距离</h4><p>对于两个n维向量x和y，它们之间的余弦距离为</p>
+<p><img src="image-20230705122408682.png" alt="image-20230705122408682"></p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</span><br><span class="line">knc = KNeighborsClassifier(n_neighbors=<span class="number">3</span>)</span><br><span class="line">knc.fit(x_train, y_train)</span><br></pre></td></tr></table></figure>
+
+<h3 id="KNeighborsClassifier可用参数："><a href="#KNeighborsClassifier可用参数：" class="headerlink" title="KNeighborsClassifier可用参数："></a>KNeighborsClassifier可用参数：</h3><ul>
+<li><code>n_neighbors</code>：指定最近邻的数量，即KNN算法中的k值。默认值为5。</li>
+<li><code>weights</code>：指定权重函数。可选值有<code>&#39;uniform&#39;</code>、<code>&#39;distance&#39;</code>和自定义函数。如果选择<code>&#39;uniform&#39;</code>，则所有邻居的权重都相等；如果选择<code>&#39;distance&#39;</code>，则权重与距离成反比；如果选择自定义函数，则可以根据距离计算权重。默认值为<code>&#39;uniform&#39;</code>。</li>
+<li><code>algorithm</code>：指定用于计算最近邻的算法。可选值有<code>&#39;auto&#39;</code>、<code>&#39;ball_tree&#39;</code>、<code>&#39;kd_tree&#39;</code>和<code>&#39;brute&#39;</code>。如果选择<code>&#39;auto&#39;</code>，则会根据数据自动选择最合适的算法；如果选择<code>&#39;ball_tree&#39;</code>，则使用BallTree算法；如果选择<code>&#39;kd_tree&#39;</code>，则使用KDTree算法；如果选择<code>&#39;brute&#39;</code>，则使用暴力搜索算法。默认值为<code>&#39;auto&#39;</code>。</li>
+<li><code>leaf_size</code>：指定BallTree或KDTree的叶子节点大小。这个参数会影响树的构建和查询速度，以及存储树所需的内存大小。默认值为30。</li>
+<li><code>p</code>：指定闵可夫斯基距离公式中的指数p。当p=1时，使用曼哈顿距离；当p=2时，使用欧氏距离。默认值为2。</li>
+<li><code>metric</code>：指定距离度量方法。可以使用任何有效的距离度量方法，默认值为’minkowski’与p参数结合使用。</li>
+<li><code>metric_params</code>: 传递给距离度量函数的其他关键字参数。</li>
+</ul>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>knn算法的核心在于如何高速的找到与预测点临近的样本，在这一方面，knn算法使用了特殊的方法来储存各个各个样本间的距离。这种储存方法称为kd树。根据选择，还可以选择Ball树作为储存方案。</p>
+<p>在数据样本数量较低时，可以直接使用暴力搜索来选择节点。但随着数据量和维度的增加，传统的暴力搜索方法速度过慢，效率过低。因此采用该储存方式来加快数据检索的速度。</p>
+<h3 id="kd树详解"><a href="#kd树详解" class="headerlink" title="kd树详解"></a>kd树详解</h3><p>以下资料转载自：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/eyeszjwang/articles/2429382.html">k-d tree算法 - J_Outsider - 博客园 (cnblogs.com)</a></p>
+<p><strong>k-d 树（k-dimensional 树的简称），是一种分割 k 维数据空间的数据结构。主要应用于多维空间关键数据的搜索（如：范围搜索和最近邻搜索）。</strong></p>
+<h4 id="生成树"><a href="#生成树" class="headerlink" title="生成树"></a>生成树</h4><p>　　以一个简单直观的实例来介绍 k-d 树算法。假设有 6 个二维数据点 {（2,3），（5,4），（9,6），（4,7），（8,1），（7,2）}，数据点位于二维空间内（如图 1 中黑点所示）。k-d 树算法就是要确定图 1 中这些分割空间的分割线（多维空间即为分割平面，一般为超平面）。下面就要通过一步步展示 k-d 树是如何确定这些分割线的。</p>
+<p><img src="image-20230705130227723.png" alt="image-20230705130227723"></p>
+<p>k-d 树算法可以分为两大部分，一部分是有关 k-d 树本身这种数据结构建立的算法，另一部分是在建立的 k-d 树上如何进行最邻近查找的算法。</p>
+<p>由于此例简单，数据维度只有 2 维，所以可以简单地给 x，y 两个方向轴编号为 0,1，也即 split={0,1}。</p>
+<p>　　（1）确定 split 域的首先该取的值。分别计算 x，y 方向上数据的方差得知 x 方向上的方差最大，所以 split 域值首先取 0，也就是 x 轴方向；</p>
+<p>　　（2）确定 Node-data 的域值。根据 x 轴方向的值 2,5,9,4,8,7 排序选出中值为 7，所以 Node-data = （7,2）。这样，该节点的分割超平面就是通过（7,2）并垂直于 split = 0（x 轴）的直线 x = 7；</p>
+<p>　　（3）确定左子空间和右子空间。分割超平面 x = 7 将整个空间分为两部分，如图 2 所示。x &lt; = 7 的部分为左子空间，包含 3 个节点 {（2,3），（5,4），（4,7）}；另一部分为右子空间，包含 2 个节点 {（9,6），（8,1）}。</p>
+<p><img src="image-20230705130541721.png" alt="image-20230705130541721"></p>
+<p>如算法所述，k-d 树的构建是一个递归的过程。然后对左子空间和右子空间内的数据重复根节点的过程就可以得到下一级子节点（5,4）和（9,6）（也就是左右子空间的 ‘根’ 节点），同时将空间和数据集进一步细分。如此反复直到空间中只包含一个数据点，如图 1 所示。最后生成的 k-d 树如图 3 所示。</p>
+<p><img src="image-20230705130601538.png" alt="image-20230705130601538"></p>
+<p>注意：每一级节点旁边的 ‘x’ 和 ‘y’ 表示以该节点分割左右子空间时 split 所取的值。</p>
+<h4 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h4><p>在 k-d 树中进行数据的查找也是特征匹配的重要环节，其目的是检索在 k-d 树中与查询点距离最近的数据点。这里先以一个简单的实例来描述最邻近查找的基本思路。</p>
+<p>　　星号表示要查询的点（2.1,3.1）。通过二叉搜索，顺着搜索路径很快就能找到最邻近的近似点，也就是叶子节点（2,3）。而找到的叶子节点并不一定就是最邻近的，最邻近肯定距离查询点更近，应该位于以查询点为圆心且通过叶子节点的圆域内。为了找到真正的最近邻，还需要进行 ‘回溯’ 操作：算法沿搜索路径反向查找是否有距离查询点更近的数据点。此例中先从（7,2）点开始进行二叉查找，然后到达（5,4），最后到达（2,3），此时搜索路径中的节点为 &lt;（7,2），（5,4），（2,3）&gt;，首先以（2,3）作为当前最近邻点，计算其到查询点（2.1,3.1）的距离为 0.1414，然后回溯到其父节点（5,4），并判断在该父节点的其他子节点空间中是否有距离查询点更近的数据点。以（2.1,3.1）为圆心，以 0.1414 为半径画圆，如图 4 所示。发现该圆并不和超平面 y = 4 交割，因此不用进入（5,4）节点右子空间中去搜索。</p>
+<p><img src="image-20230705130843024.png" alt="image-20230705130843024"></p>
+<p>再回溯到（7,2），以（2.1,3.1）为圆心，以 0.1414 为半径的圆更不会与 x = 7 超平面交割，因此不用进入（7,2）右子空间进行查找。至此，搜索路径中的节点已经全部回溯完，结束整个搜索，返回最近邻点（2,3），最近距离为 0.1414。</p>
+<p>　　一个复杂点了例子如查找点为（2，4.5）。同样先进行二叉查找，先从（7,2）查找到（5,4）节点，在进行查找时是由 y = 4 为分割超平面的，由于查找点为 y 值为 4.5，因此进入右子空间查找到（4,7），形成搜索路径 &lt;（7,2），（5,4），（4,7）&gt;，取（4,7）为当前最近邻点，计算其与目标查找点的距离为 3.202。然后回溯到（5,4），计算其与查找点之间的距离为 3.041。以（2，4.5）为圆心，以 3.041 为半径作圆，如图 5 所示。可见该圆和 y = 4 超平面交割，所以需要进入（5,4）左子空间进行查找。此时需将（2,3）节点加入搜索路径中得 &lt;（7,2），（2,3）&gt;。回溯至（2,3）叶子节点，（2,3）距离（2,4.5）比（5,4）要近，所以最近邻点更新为（2，3），最近距离更新为 1.5。回溯至（7,2），以（2,4.5）为圆心 1.5 为半径作圆，并不和 x = 7 分割超平面交割，如图 6 所示。至此，搜索路径回溯完。返回最近邻点（2,3），最近距离 1.5。</p>
+<p><img src="image-20230705130921298.png" alt="image-20230705130921298"></p>
+<h1 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h1><h2 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h2><h3 id="说人话-1"><a href="#说人话-1" class="headerlink" title="说人话"></a>说人话</h3><p>决策树就是一系列的判断语句。举个例子：</p>
+<p>现在我有了一堆好学生和坏学生的数据，如果根据决策树来进行学习，那么就会得到以下的树：</p>
+<p><img src="image-20230705132301390.png" alt="image-20230705132301390"></p>
+<p>可以看到，决策树就是一系列的判断句。而决策树算法就是生成这一系列判断句的算法。</p>
+<p>想要生成一个好的树，需要引入信息熵的概念。信息熵就是对不确定性的消除。</p>
+<p>举个例子：现在有小明和小红两人，我想要知道小明的年龄，这时，小明说：“我17岁了。”很明显，因为这句话，我们知道了小明的年龄，小明的年龄对我们来说不再是不确定的。那么我们就认为这句话的信息熵很大。</p>
+<p>但接着，小红又说：“小明喜欢吃糖果。”明显，这句话没有消除任何对于年龄的不确定性。所以我们认为小红的这句话信息熵很低。</p>
+<p>在理解了信息熵以后，我们就能理解如何生成一颗优秀的决策树了。只要我们找出各个语句的信息熵，然后根据信息熵来排序，这样我们就能得到一颗好的决策树。</p>
+<h3 id="具体计算-1"><a href="#具体计算-1" class="headerlink" title="具体计算"></a>具体计算</h3><p>构建决策树的过程可以概括为以下四个步骤：</p>
+<ol>
+<li><strong>特征选择</strong>：从所有特征中选择一个最优特征进行划分。常见的特征选择标准有信息增益（Information Gain）、信息增益比（Gain Ratio）、基尼指数（Gini Index）等。</li>
+<li><strong>决策树生成</strong>：根据选择的特征，将数据集划分为若干个子集。为每个子集生成对应的子节点，并将这些子节点作为当前节点的分支。对每个子节点，重复第 1 步和第 2 步，直到满足停止条件。</li>
+<li><strong>停止条件</strong>：当满足以下任一条件时，停止决策树的生成：</li>
+</ol>
+<ul>
+<li><p>所有特征已经被用于划分；</p>
+</li>
+<li><p>所有子集中的样本都属于同一类别；</p>
+</li>
+<li><p>子集中样本数量不足以继续划分。</p>
+<p>常见的决策树算法有ID3、C4.5和CART。</p>
+<p>详细请参考：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/85731206">【机器学习】决策树（上）——ID3、C4.5、CART（非常详细） - 知乎 (zhihu.com)</a></p>
+</li>
+</ul>
+<h2 id="补充-1"><a href="#补充-1" class="headerlink" title="补充"></a>补充</h2><p>决策树是一种常用的机器学习算法，它具有以下优点：</p>
+<ul>
+<li>易于理解和解释。决策树可以可视化，便于理解模型的预测过程。</li>
+<li>需要很少的数据准备。决策树不需要对数据进行归一化或标准化。</li>
+<li>能够处理多种数据类型。决策树既可以处理数值型数据，也可以处理类别型数据。</li>
+<li>能够处理多输出问题。决策树可以用于多分类问题和多目标回归问题。</li>
+</ul>
+<p>但是，决策树也有一些缺点：</p>
+<ul>
+<li>容易过拟合。如果决策树过于复杂，可能会过拟合训练数据，导致泛化能力差。</li>
+<li>不稳定性。决策树对数据中的微小变化非常敏感，可能会导致生成的决策树完全不同。</li>
+<li>局部最优。决策树算法采用贪心策略，在每个节点上选择最优特征进行分裂，但这并不一定能够生成全局最优的决策树。</li>
+</ul>
+<h1 id="朴素贝叶斯"><a href="#朴素贝叶斯" class="headerlink" title="朴素贝叶斯"></a>朴素贝叶斯</h1><h2 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h2><h3 id="说人话-2"><a href="#说人话-2" class="headerlink" title="说人话"></a>说人话</h3><p>朴素：假设各个条件之间相互独立</p>
+<p>贝叶斯：贝叶斯公式</p>
+<p>朴素贝叶斯生成模型是一个概率模型。换句话说，朴素贝叶斯的目的是为了通过基础条件得到为各个类别的概率，然后选一个概率最大的，就是预测值。</p>
+<p>举个例子，现在有一堆硬币，有的上面黏上了重物，有的。然后统计这堆硬币抛出的结果（正反面），然后根据这些结果来预测下个硬币的结果。</p>
+<p>在计算过后，发现，黏有重物的硬币正面向上的概率为0.9，而没有重物的概率则为0.4。现在有一个黏上了重物的硬币，根据概率，正面向上的概率较大，因此我们认为该硬币抛下后应该为正面。</p>
+<p>而计算各个条件下的概率就是朴素贝叶斯要做的。</p>
+<h3 id="具体计算-2"><a href="#具体计算-2" class="headerlink" title="具体计算"></a>具体计算</h3><p>在分类时，对给定的输入x，通过学习到的模型计算后验概率分布P(Y = ck∣X = x)，将后验概率最大的类作为x的类输出。<br>$$<br>P(Y|X) = \frac{P(X|Y) P(Y) } {P(X)}<br>$$</p>
+<h2 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.naive_bayes <span class="keyword">import</span> MultinomialNB</span><br><span class="line">mnb = MultinomialNB(force_alpha=<span class="literal">True</span>)</span><br><span class="line">mnb.fit(n_x_train, n_y_train)</span><br></pre></td></tr></table></figure>
+
+<h3 id="MultinomialNB可用参数"><a href="#MultinomialNB可用参数" class="headerlink" title="MultinomialNB可用参数"></a>MultinomialNB可用参数</h3><ul>
+<li><code>alpha</code>：浮点型，可选，默认为1.0。这是拉普拉斯/利兹通平滑参数（如果将 alpha 设为 0 并将 force_alpha 设为 True，则不进行平滑）。</li>
+<li><code>fit_prior</code>：布尔型，可选，默认为 True。表示是否学习类的先验概率。如果为 false，则使用均匀先验。</li>
+<li><code>class_prior</code>：数组形状 (n_classes,)，可选，默认为 None。类的先验概率。如果指定，则不根据数据调整先验。</li>
+</ul>
+<h2 id="补充-2"><a href="#补充-2" class="headerlink" title="补充"></a>补充</h2><p>优点：</p>
+<p>朴素贝叶斯模型有稳定的分类效率。<br>对小规模的数据表现很好，能处理多分类任务，适合增量式训练，尤其是数据量超出内存时，可以一批批的去增量训练。<br>对缺失数据不太敏感，算法也比较简单，常用于文本分类。<br>缺点：</p>
+<p>理论上，朴素贝叶斯模型与其他分类方法相比具有最小的误差率。但是实际上并非总是如此，这是因为朴素贝叶斯模型假设属性之间相互独立，这个假设在实际应用中往往是不成立的，在属性个数比较多或者属性之间相关性较大时，分类效果不好。<br>需要知道先验概率，且先验概率很多时候取决于假设，假设的模型可以有很多种，因此在某些时候会由于假设的先验模型的原因导致预测效果不佳。<br>分类决策存在一定的错误率。</p>
+<h1 id="随机森林"><a href="#随机森林" class="headerlink" title="随机森林"></a>随机森林</h1><h2 id="原理-3"><a href="#原理-3" class="headerlink" title="原理"></a>原理</h2><h3 id="说人话-3"><a href="#说人话-3" class="headerlink" title="说人话"></a>说人话</h3><p>随机森林是对决策的树一种优化方法。在原来使用决策树来进行模型生成时，容易出现过拟合的问题。而随机森林可以很好的避免这个问题。</p>
+<p>而随机森林的具体做法也很简单，首先从原数据集中产生一堆小的数据集。接着，对这一堆小数据集进行决策树法进行生成模型，然后将这些模型以少数服从多数的方法来融合起来，最后就能得到一个有着比较好的的效果的模型。</p>
+<h2 id="使用-2"><a href="#使用-2" class="headerlink" title="使用"></a>使用</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 随机森林对新闻进行分类</span></span><br><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestClassifier</span><br><span class="line">rfc = RandomForestClassifier()</span><br><span class="line"><span class="comment"># 加入网格搜索和交叉验证</span></span><br><span class="line"><span class="comment"># 网格参数准备(基本学习器的数量，最大生成树深度)</span></span><br><span class="line">opint = [&#123;<span class="string">&#x27;n_estimators&#x27;</span>: [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>], <span class="string">&#x27;max_depth&#x27;</span>: [<span class="number">30</span>, <span class="number">50</span>, <span class="number">70</span>, <span class="number">100</span>]&#125;]</span><br><span class="line"><span class="comment"># 实例化GridSearchCV类</span></span><br><span class="line">gsc = GridSearchCV(rfc, param_grid=opint, cv=<span class="number">7</span>)</span><br><span class="line">gsc.fit(n_x_train, n_y_train)</span><br></pre></td></tr></table></figure>
+
+<h3 id="可选参数"><a href="#可选参数" class="headerlink" title="可选参数"></a>可选参数</h3><ul>
+<li><code>n_estimators</code>: 整数，表示算法构建的决策树的数量。</li>
+<li><code>criterion</code>: 用于衡量分裂质量的函数。支持的标准有“gini”用于基尼不纯度和“entropy”用于信息增益。</li>
+<li><code>max_depth</code>: 树的最大深度。如果为None，则节点扩展直到所有叶子都是纯的或直到所有叶子都包含少于min_samples_split个样本。</li>
+<li><code>min_samples_split</code>: 分裂内部节点所需的最小样本数。</li>
+<li><code>min_samples_leaf</code>: 叶节点所需的最小样本数。</li>
+<li><code>max_features</code>: 寻找最佳分裂时要考虑的特征数量。</li>
+</ul>
+<h2 id="补充-3"><a href="#补充-3" class="headerlink" title="补充"></a>补充</h2><p><strong>优点</strong>：</p>
+<ul>
+<li><p>随机森林是最准确的决策模型之一。</p>
+</li>
+<li><p>在大型数据集上表现良好。</p>
+</li>
+<li><p>可以用来提取变量重要性。</p>
+</li>
+<li><p>不需要特征工程（缩放和归一化）。</p>
+</li>
+<li><p>减少了决策树中的过拟合，并提高了精度。</p>
+</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li><p>随机森林算法需要大量的参数调整，以获得最佳性能。</p>
+</li>
+<li><p>训练时间可能较长，尤其是在大型数据集上。</p>
+</li>
+</ul>
+<h1 id="逻辑回归"><a href="#逻辑回归" class="headerlink" title="逻辑回归"></a>逻辑回归</h1><h2 id="原理-4"><a href="#原理-4" class="headerlink" title="原理"></a>原理</h2><h3 id="说人话-4"><a href="#说人话-4" class="headerlink" title="说人话"></a>说人话</h3><p>要明白逻辑回归，首先需要对线性回归有所了解。对于线性回归，最后会得到一个方程，形式差不多如下：</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f(<span class="keyword">x</span>) <span class="operator">=</span> k<span class="number">1</span><span class="keyword">x</span><span class="number">1</span> + k<span class="number">2</span><span class="keyword">x</span><span class="number">2</span> + ...... + knxn +b</span><br></pre></td></tr></table></figure>
+
+<p>而逻辑回归，就是将这个方程放到一个特殊的表达式里，这个表达式名为：Sigmoid 函数。长这样：</p>
+<p><img src="image-20230705230752007.png" alt="image-20230705230752007"></p>
+<p>在其中，z就是我们需要将方程代入的地方。</p>
+<p>根据这个图像，很容易就能明白。这个Sigmoid 函数值域是0-1。而现在，我们将任意函数放进这个函数里后都能将该函数的值域映射到0-1区间内，再紧接着，设定一个阈值，逻辑回归就完成了。</p>
+<p>比如阈值为0.6，那么代入方程后大于0.6的值就为一个类别，而小于或等于0.6就为另一个类别。</p>
+<h2 id="使用-3"><a href="#使用-3" class="headerlink" title="使用"></a>使用</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line">lr = LogisticRegression()</span><br><span class="line">lr.fit(x_train, y_train)</span><br></pre></td></tr></table></figure>
+
+<p>ps:逻辑回归一般用于二分问题</p>
+<h4 id="LogisticRegression可选参数"><a href="#LogisticRegression可选参数" class="headerlink" title="LogisticRegression可选参数"></a>LogisticRegression可选参数</h4><ul>
+<li><code>penalty</code>: 正则化类型。可选值为 <code>&#39;l1&#39;</code>, <code>&#39;l2&#39;</code>, <code>&#39;elasticnet&#39;</code> 或 <code>&#39;none&#39;</code>。默认值为 <code>&#39;l2&#39;</code>。</li>
+<li><code>dual</code>: 是否使用对偶形式。当样本数量大于特征数量时，应设置为 <code>False</code>。默认值为 <code>False</code>。</li>
+<li><code>tol</code>: 停止准则的容差。当优化算法收敛到一定程度时，算法将停止迭代。默认值为 <code>1e-4</code>。</li>
+<li><code>C</code>: 正则化强度的倒数。必须是正数。较小的值表示更强的正则化。默认值为 <code>1.0</code>。</li>
+<li><code>fit_intercept</code>: 是否计算截距。如果设置为 <code>False</code>，则不会在计算中使用截距。默认值为 <code>True</code>。</li>
+<li><code>intercept_scaling</code>: 截距缩放因子。仅在使用解算器时有用，例如 <code>&#39;liblinear&#39;</code> 时有用。默认值为 <code>1</code>。</li>
+<li><code>class_weight</code>: 类别权重。可选值为 <code>&#39;balanced&#39;</code> 或字典形式，或者 <code>None</code>。如果给定字典，则每个类别都应该有一个相应的权重。如果设置为 <code>&#39;balanced&#39;</code>，则类别权重将根据训练数据中每个类别出现的频率自动调整。如果设置为 <code>None</code>，则所有类别的权重都将设置为1。默认值为 <code>None</code>。</li>
+<li><code>random_state</code>: 随机数生成器的种子或随机数生成器实例。用于在正则化时打乱数据以及在多类分类问题中选择最优解算器。默认值为 <code>None</code>。</li>
+<li><code>solver</code>: 用于优化问题的算法。可选值有 <code>&#39;newton-cg&#39;</code>, <code>&#39;lbfgs&#39;</code>, <code>&#39;liblinear&#39;</code>, <code>&#39;sag&#39;</code>, <code>&#39;saga&#39;</code> 等。默认值为 <code>&#39;lbfgs&#39;</code>。</li>
+<li><code>max_iter</code>: 解算器收敛所需的最大迭代次数。默认值为 <code>100</code>。</li>
+<li><code>multi_class</code>: 多类分类策略。可选值有 <code>&#39;auto&#39;</code>, <code>&#39;ovr&#39;</code>, <code>&#39;multinomial&#39;</code> 等。如果选择了 <code>&#39;ovr&#39;</code>，则会使用一对多策略来解决多类分类问题；如果选择了 <code>&#39;multinomial&#39;</code>，则会使用多项式损失来解决多类分类问题；如果选择了 <code>&#39;auto&#39;</code>，则会根据数据和其他参数自动选择最佳策略。默认值为 <code>&#39;auto&#39;</code>.</li>
+<li><code>verbose</code>: 冗长模式开关。对于某些解算器（例如 ‘liblinear’ 和 ‘lbfgs’），可以设置为任意正整数来控制冗长输出的详细程度。默认值为0。</li>
+<li><code>warm_start</code>: 热启动开关。如果设置为 True，则在拟合新数据时会重用上一次拟合的结果作为初始条件，默认值是 False。</li>
+<li><code>n_jobs</code>: 并行运算时使用的 CPU 核心数量，默认是 None 即 1 个核心。</li>
+</ul>
+<h2 id="补充-4"><a href="#补充-4" class="headerlink" title="补充"></a>补充</h2><h4 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h4><ul>
+<li>简单易懂：逻辑回归模型简单易懂，容易解释。它可以给出每个特征对结果的影响程度。</li>
+<li>训练速度快：逻辑回归模型训练速度快，可以快速地在大数据集上进行训练。</li>
+<li>鲁棒性强：逻辑回归对噪声数据和异常值不敏感，具有较强的鲁棒性。</li>
+<li>可以处理多分类问题：逻辑回归不仅可以处理二分类问题，还可以通过一对多策略或多项式损失来处理多分类问题。</li>
+</ul>
+<h4 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h4><ul>
+<li>对线性可分数据效果好：逻辑回归假设数据是线性可分的，如果数据不是线性可分的，则模型的效果会变差。</li>
+<li>容易欠拟合：逻辑回归模型容易欠拟合，因为它只能拟合线性决策边界。</li>
+<li>对数据预处理要求高：逻辑回归对数据预处理要求较高，需要对数据进行标准化、缺失值填充等预处理操作。</li>
+</ul>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2023/03/20/数据挖掘入门下-b站三体案例/" data-toggle="tooltip" data-placement="top" title="数据挖掘入门练习下-b站三体案例">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#笔记" title="笔记">笔记</a>
+                        
+                          <a class="tag" href="/tags/#机器学习" title="机器学习">机器学习</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="#" target="_blank">Cat</a></li>
+                    
+                        <li><a href="https://wchang.fun/" target="_blank">cang</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/ZOUYIQAQ">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    <a href="https://icp.gov.moe/?keyword=20230815" target="_blank"> 萌 ICP 备 20230815 号 </a>
+                    Copyright &copy; Cyber Sorcerer&#39;s Blog 2023 
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    Ported by <a target="_blank" rel="noopener" href="http://blog.kaijun.rocks">Kaijun</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=kaijun&repo=hexo-theme-huxblog&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://cbcat.top/ZOUYIQAQ.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'cbcat.top';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://cbcat.top/ZOUYIQAQ.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
